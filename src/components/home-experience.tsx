@@ -78,6 +78,97 @@ export function RecordCard({ record }: { record: BaselineRecord }) {
     </article>
   );
 }
+const coordinates: Record<string, [number, number]> = {
+  china: [116, 40],
+  "hong-kong": [114, 22],
+  macao: [113.5, 22.2],
+  "united-states": [-77, 39],
+  "european-union": [4, 50],
+  "united-kingdom": [-1, 52],
+  japan: [139, 36],
+  "south-korea": [127, 37],
+  singapore: [104, 1],
+  india: [77, 28],
+  canada: [-75, 45],
+  australia: [151, -34],
+  asean: [101, 3],
+  "african-union": [38, 9],
+  "united-nations": [-74, 41],
+  oecd: [2, 49],
+  "council-of-europe": [7, 49],
+};
+const landPolygons: number[][][] = [
+  [
+    [-168, 72],
+    [-145, 70],
+    [-125, 55],
+    [-105, 50],
+    [-98, 25],
+    [-82, 12],
+    [-76, 25],
+    [-58, 48],
+    [-60, 60],
+    [-95, 75],
+    [-135, 78],
+    [-168, 72],
+  ],
+  [
+    [-81, 12],
+    [-70, 5],
+    [-64, -18],
+    [-55, -35],
+    [-60, -54],
+    [-74, -52],
+    [-80, -20],
+    [-81, 12],
+  ],
+  [
+    [-12, 72],
+    [25, 72],
+    [55, 58],
+    [44, 42],
+    [25, 35],
+    [12, 43],
+    [-8, 38],
+    [-12, 72],
+  ],
+  [
+    [-18, 35],
+    [10, 35],
+    [35, 28],
+    [44, 10],
+    [35, -35],
+    [15, -35],
+    [-5, 5],
+    [-18, 35],
+  ],
+  [
+    [40, 72],
+    [100, 74],
+    [145, 55],
+    [150, 35],
+    [115, 8],
+    [75, 15],
+    [45, 35],
+    [40, 72],
+  ],
+  [
+    [112, -12],
+    [154, -12],
+    [153, -40],
+    [120, -43],
+    [112, -12],
+  ],
+];
+const project = ([longitude, latitude]: [number, number]) =>
+  [(longitude + 180) / 3.6, (90 - latitude) / 1.8] as const;
+const pathFor = (ring: number[][]) =>
+  ring
+    .map(
+      ([lon, lat], i) =>
+        `${i ? "L" : "M"}${project([lon, lat] as [number, number]).join(" ")}`,
+    )
+    .join(" ") + "Z";
 export function WorldMap({ actors }: { actors: Actor[] }) {
   const [selected, setSelected] = useState<Actor | null>(actors[0]);
   useEffect(() => {
@@ -101,33 +192,43 @@ export function WorldMap({ actors }: { actors: Actor[] }) {
           role="group"
           aria-label="国家与地区治理路径地图"
         >
-          <svg
-            viewBox="0 0 100 100"
-            aria-hidden="true"
-            preserveAspectRatio="none"
-          >
-            {Array.from({ length: 150 }, (_, i) => (
-              <circle
-                key={i}
-                cx={(i * 17) % 100}
-                cy={((i * 31) % 76) + 12}
-                r=".45"
-                className="map-dot"
-              />
-            ))}
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <clipPath id="land-clip">
+                {landPolygons.map((polygon, i) => (
+                  <path key={i} d={pathFor(polygon)} />
+                ))}
+              </clipPath>
+            </defs>
+            <g clipPath="url(#land-clip)" aria-hidden="true">
+              {Array.from({ length: 900 }, (_, i) => (
+                <circle
+                  key={i}
+                  cx={(i % 45) * 2.25}
+                  cy={Math.floor(i / 45) * 5 + 5}
+                  r=".42"
+                  className="map-dot"
+                />
+              ))}
+            </g>
+            {actors.map((a) => {
+              const [x, y] = project(coordinates[a.slug]);
+              return (
+                <g key={a.slug} transform={`translate(${x} ${y})`}>
+                  <foreignObject x="-2" y="-2" width="4" height="4">
+                    <button
+                      className={`map-node ${a.orientation}`}
+                      onFocus={() => setSelected(a)}
+                      onClick={() => setSelected(a)}
+                      aria-label={`${a.name}：${a.orientation}`}
+                    >
+                      <span />
+                    </button>
+                  </foreignObject>
+                </g>
+              );
+            })}
           </svg>
-          {actors.map((a) => (
-            <button
-              key={a.slug}
-              className={`map-node ${a.orientation}`}
-              style={{ left: `${a.x}%`, top: `${a.y}%` }}
-              onFocus={() => setSelected(a)}
-              onClick={() => setSelected(a)}
-              aria-label={`${a.name}：${a.orientation}`}
-            >
-              <span />
-            </button>
-          ))}
         </div>
         <ActorCard actor={selected} onClose={() => setSelected(null)} />
       </div>

@@ -8,6 +8,7 @@ import {
   relationships,
 } from "@/data/baseline";
 import { Timeline, WorldMap } from "@/components/home-experience";
+import { NetworkPreview } from "@/components/network-preview";
 export default function Home() {
   const policyCount = records.filter((r) => r.kind !== "学术研究").length,
     research = records.filter((r) => r.kind === "学术研究").length;
@@ -76,20 +77,9 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow">RELATIONSHIP PREVIEW</p>
           <h2>全球合作与竞争</h2>
-          <p>追踪国际合作、共同签署、制度关联和政策分歧。</p>
+          <p>网络关系均基于来源证据，不代表因果关系。</p>
         </div>
-        <div className="relationship-grid">
-          {relationships.slice(0, 4).map((r) => (
-            <article key={`${r.from}-${r.to}`}>
-              <p className="metadata">{r.type}</p>
-              <h3>
-                {r.from} <span>→</span> {r.to}
-              </h3>
-              <p>{r.note}</p>
-              <small>证据：{r.evidence}</small>
-            </article>
-          ))}
-        </div>
+        <NetworkPreview />
         <Link className="text-link" href="/cooperation">
           查看完整关系网络 →
         </Link>
