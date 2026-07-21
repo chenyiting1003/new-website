@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function ReviewQueue(){return <main><p className="eyebrow">ADMIN / REVIEW QUEUE</p><div className="heading"><div><h1>待审核记录</h1><p>未批准内容不会出现在正式知识库。</p></div><span className="count">1 Pending</span></div><section className="queue"><div><span className="status pending">待审核</span><h2>示例：AI 治理实施动态</h2><p>来源已暂存，等待逐字段核验与编辑。</p></div><div className="meta">政策 · 置信度 0.91<br/>一手来源已标记</div><Link className="button quiet" href="/admin/review/demo-submission">审核记录 →</Link></section><p className="notice">这是开发演示数据，不是正式政策或历史基线。</p></main>}

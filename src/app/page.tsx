@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Home() { return <main><p className="eyebrow">PRIVATE RESEARCH WORKSPACE · PHASE 0–1</p><h1>Mondays <i>·</i> AI治理周报</h1><p className="lede">Global AI Governance Policy &amp; Research Observatory</p><section className="panel"><h2>审核闭环已就绪</h2><p>外部检索结果进入私有 Pending 区；只有在人工核验、修改并批准后，才会成为正式记录。</p><Link className="button" href="/admin/review">打开待审核队列 <span>→</span></Link></section><dl><div><dt>数据状态</dt><dd>演示数据</dd></div><div><dt>发布规则</dt><dd>人工批准</dd></div><div><dt>访问范围</dt><dd>私有</dd></div></dl></main> }
