@@ -21,3 +21,9 @@ npm run dev
 ## 仍未实现
 
 Phase 2 及后续功能：历史基线与可核验 seed、地图、国家页、周报、研究库、关系网络、笔记标签、导出、真实 Supabase Auth/API、生产部署。
+
+## 本地历史基线阅读版
+
+首页现在使用 `src/data/baseline/` 下的本地、类型化历史基线 fixtures；每条展示记录均保留来源 URL 与核验标记。该数据用于阅读和界面验证，不替代 Supabase 中的正式记录，也不写入外部服务。
+
+可浏览：`/countries`、`/cooperation`、`/research`、`/weekly/historical-baseline-2026`、`/library` 与 `/search`。完整筛选、认证、持久化审核、个人笔记/标签和导出仍不在本轮范围内。
