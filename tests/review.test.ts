@@ -1,0 +1,3 @@
+import { describe, expect, it } from "vitest";
+import { canTransition, normalizeDoi, submissionSchema } from "@/lib/review";
+describe("review safeguards", () => { it("only permits the documented workflow", () => { expect(canTransition("pending", "approved")).toBe(true); expect(canTransition("pending", "published")).toBe(false); }); it("normalizes DOI", () => expect(normalizeDoi(" DOI: https://doi.org/10.1000/ABC ")).toBe("10.1000/abc")); it("requires an http source", () => expect(submissionSchema.safeParse({titleOriginal:"A policy document",summary:"A source-supported summary.",sourceUrl:"ftp://example.com",verificationStatus:"unverified",recordType:"policy"}).success).toBe(false)); });
