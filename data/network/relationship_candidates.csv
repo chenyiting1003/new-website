@@ -1,0 +1,2 @@
+candidate_id,source_actor_id,target_actor_id,suggested_relation_type,method,similarity_score,explanation,evidence_document_ids,review_status
+candidate-1,oecd,hiroshima-ai-process,policy_reference_diffusion,text_similarity,0.62,仅文本候选，不进入正式网络,oecd-ai-principles;hiroshima-process,pending
