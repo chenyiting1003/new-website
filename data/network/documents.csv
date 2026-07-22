@@ -1,0 +1,5 @@
+document_id,title_zh,title_original,record_type,publication_date,issuer,legal_status,verification_status,source_url,summary_zh,doi
+oecd-ai-principles,,OECD AI Principles,statement,2019-05-22,OECD,non_binding,verified_primary,https://oecd.ai/en/ai-principles,经OECD理事会通过的原则,
+hiroshima-process,广岛人工智能进程综合政策框架,Hiroshima AI Process Comprehensive Policy Framework,statement,2023-12-01,G7,framework,verified_primary,https://www.mofa.go.jp/files/100606565.pdf,G7框架,
+bletchley-declaration,布莱切利宣言,Bletchley Declaration,statement,2023-11-01,AI Safety Summit,statement,verified_primary,https://www.gov.uk/government/publications/ai-safety-summit-2023-the-bletchley-declaration/ai-safety-summit-2023-the-bletchley-declaration,共同声明,
+global-ai-governance-initiative,全球人工智能治理倡议,Global AI Governance Initiative,statement,2023-10-18,中华人民共和国外交部,initiative,verified_primary,https://www.fmprc.gov.cn/eng/wjdt_665385/2649_665393/202310/t20231018_11163991.html,中国提出的倡议,

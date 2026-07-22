@@ -1,0 +1,9 @@
+actor_id,slug,name_zh,name_en,actor_type,region,longitude,latitude
+oecd,oecd,OECD,OECD,international_organization,Europe,2.35,48.86
+g7,g7,G7,G7,governance_initiative,Global,0,50
+hiroshima-ai-process,hiroshima-ai-process,广岛AI进程,Hiroshima AI Process,governance_initiative,Asia,132.46,34.39
+bletchley-declaration,bletchley-declaration,布莱切利宣言,Bletchley Declaration,governance_initiative,Europe,-0.8,51.99
+china,china,中国,China,country,Asia,116.4,39.9
+global-ai-governance-initiative,global-ai-governance-initiative,全球人工智能治理倡议,Global AI Governance Initiative,governance_initiative,Global,116.4,39.9
+united-nations,united-nations,联合国,United Nations,international_organization,North America,-74,40.75
+governing-ai-humanity,governing-ai-humanity,为人类治理人工智能,Governing AI for Humanity,governance_initiative,Global,-74,40.75
