@@ -638,3 +638,88 @@ footer {
     min-height: 280px;
   }
 }
+.map-node {
+  width: 32px;
+  height: 32px;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+.map-node .visible-node {
+  position: absolute;
+  inset: 10px;
+  display: block;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 1px rgba(37, 49, 58, 0.25);
+}
+.map-node.regulatory .visible-node {
+  background: #d38b58;
+}
+.map-node.innovation_led .visible-node {
+  background: #8ea6b2;
+}
+.map-node.international_coordination .visible-node {
+  background: #91a89a;
+}
+.map-node.hybrid .visible-node {
+  background: #e7a44a;
+}
+.map-node .hit-area {
+  position: absolute;
+  inset: 0;
+}
+.map-node:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+.featured-grid,
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.featured-card,
+.tool-card {
+  padding: 18px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.featured-art {
+  height: 110px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #edf1ed, #e6ecef);
+  margin-bottom: 14px;
+}
+.tools-section {
+  background: #edf1ed;
+  padding: 28px;
+  border-radius: 10px;
+}
+.network-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.network-controls button {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.network-controls button[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff;
+}
+.document-node {
+  rx: 2;
+  fill: #e7a44a;
+}
+@media (max-width: 820px) {
+  .featured-grid,
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+}

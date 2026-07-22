@@ -18,7 +18,7 @@ describe("historical baseline", () => {
   });
   it("uses data-derived homepage counts", () => {
     expect(records.length).toBeGreaterThan(0);
-    expect(actors.length).toBe(17);
+    expect(actors.length).toBe(18);
     expect(relationships.length).toBeGreaterThan(0);
     expect(
       records.filter((record) => record.kind === "学术研究").length,

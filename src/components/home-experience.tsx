@@ -96,6 +96,7 @@ const coordinates: Record<string, [number, number]> = {
   "united-nations": [-74, 41],
   oecd: [2, 49],
   "council-of-europe": [7, 49],
+  taiwan: [121, 23.7],
 };
 const landPolygons: number[][][] = [
   [
@@ -215,14 +216,15 @@ export function WorldMap({ actors }: { actors: Actor[] }) {
               const [x, y] = project(coordinates[a.slug]);
               return (
                 <g key={a.slug} transform={`translate(${x} ${y})`}>
-                  <foreignObject x="-2" y="-2" width="4" height="4">
+                  <foreignObject x="-8" y="-8" width="16" height="16">
                     <button
                       className={`map-node ${a.orientation}`}
                       onFocus={() => setSelected(a)}
                       onClick={() => setSelected(a)}
                       aria-label={`${a.name}：${a.orientation}`}
                     >
-                      <span />
+                      <span className="visible-node" />
+                      <span className="hit-area" />
                     </button>
                   </foreignObject>
                 </g>
@@ -292,6 +294,16 @@ function ActorCard({
           <dd>{actor.year}</dd>
         </div>
       </dl>
+      {actor.slug === "taiwan" && (
+        <a
+          className="button small"
+          href="https://moda.gov.tw/major-policies/ai/governance/1785"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          官方治理网站 ↗
+        </a>
+      )}
       <Link className="button small" href={`/countries/${actor.slug}`}>
         查看详情
       </Link>

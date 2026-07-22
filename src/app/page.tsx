@@ -9,6 +9,10 @@ import {
 } from "@/data/baseline";
 import { Timeline, WorldMap } from "@/components/home-experience";
 import { NetworkPreview } from "@/components/network-preview";
+import {
+  featuredItems,
+  governanceTools,
+} from "@/data/tools/ai-governance-tools";
 export default function Home() {
   const policyCount = records.filter((r) => r.kind !== "学术研究").length,
     research = records.filter((r) => r.kind === "学术研究").length;
@@ -105,6 +109,51 @@ export default function Home() {
             );
           })}
         </div>
+      </section>
+      <section className="section">
+        <div className="section-heading">
+          <p className="eyebrow">FEATURED</p>
+          <h2>精选内容</h2>
+        </div>
+        <div className="featured-grid">
+          {featuredItems.map((item) => (
+            <article className="featured-card" key={item.id}>
+              <div className="featured-art" />
+              <p className="metadata">
+                {item.type.toUpperCase()} · Placeholder / 待添加
+              </p>
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+              <small>待添加</small>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="section tools-section">
+        <div className="section-heading">
+          <p className="eyebrow">AI GOVERNANCE TOOLS & PLATFORMS</p>
+          <h2>治理工具与平台</h2>
+          <p>收集私营部门或独立机构开发的AI治理研究与工具入口。</p>
+        </div>
+        <div className="tools-grid">
+          {governanceTools.map((tool) => (
+            <article className="tool-card" key={tool.id}>
+              <p className="metadata">
+                {tool.providerType} · {tool.accessType}
+              </p>
+              <h3>{tool.name}</h3>
+              {tool.productName && <p>{tool.productName}</p>}
+              <p>{tool.descriptionZh}</p>
+              <p className="tags">{tool.categories.join(" · ")}</p>
+              <a href={tool.url} target="_blank" rel="noopener noreferrer">
+                访问网站 ↗
+              </a>
+            </article>
+          ))}
+        </div>
+        <p className="notice">
+          这些链接用于研究资源导航，不构成对产品、服务或合规能力的推荐。
+        </p>
       </section>
       <section className="section final-issue">
         <div>

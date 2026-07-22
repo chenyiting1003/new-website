@@ -436,6 +436,18 @@ export const actors: Actor[] = [
   y: Number(y),
 }));
 
+actors.push({
+  slug: "taiwan",
+  name: "台湾地区",
+  nameEn: "Taiwan",
+  orientation: "hybrid",
+  summary: "以政府数字政策、风险治理与产业应用协调推进人工智能治理。",
+  mechanism: "政府官方网站 AI 治理入口",
+  year: "—",
+  x: 0,
+  y: 0,
+});
+
 export const periods = [
   {
     slug: "2016-2020",
