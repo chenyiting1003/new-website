@@ -7,12 +7,14 @@ import {
 } from "@/data/baseline";
 import { RecordCard } from "@/components/home-experience";
 import { notFound } from "next/navigation";
+import { WeeklyBriefPage } from "./weekly-brief";
 export default async function Issue({
   params,
 }: {
   params: Promise<{ issueSlug: string }>;
 }) {
   const { issueSlug } = await params;
+  if (issueSlug === "2026-07-27") return <WeeklyBriefPage />;
   if (issueSlug !== baselineIssue.slug) notFound();
   const research = records.filter((r) => r.kind === "学术研究");
   return (
