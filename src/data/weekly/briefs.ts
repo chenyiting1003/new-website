@@ -166,20 +166,69 @@ export const weeklyBrief20260727 = {
   researchQuestions: ["AI agent透明度最低应包含哪些要素？"],
   recommendedReading: {
     officialPolicy: [
-      "欧盟 AI Omnibus 最终批准说明",
-      "中国人工智能拟人化互动服务管理暂行办法",
-      "加拿大 AI 透明度咨询",
+      {
+        label: "欧盟 AI Omnibus 最终批准说明",
+        url: "https://skribi.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/",
+      },
+      {
+        label: "中国人工智能拟人化互动服务管理暂行办法",
+        url: "https://www.cac.gov.cn/2026-04/10/c_1777558395023172.htm",
+      },
+      {
+        label: "加拿大 AI 透明度咨询",
+        url: "https://www.canada.ca/en/innovation-science-economic-development/news/2026/07/government-of-canada-launches-public-consultation-on-ai-transparency.html",
+      },
     ],
     institutionalResearch: [
-      "UN Preliminary Report",
-      "Stanford HAI mental health AI",
-      "AI Now Friendly Fire",
+      {
+        label: "UN Preliminary Report",
+        url: "https://www.un.org/independent-international-scientific-panel-ai/en/preliminary-report",
+      },
+      { label: "Stanford HAI mental health AI" },
+      { label: "AI Now Friendly Fire" },
     ],
-    academicLiterature: ["Hasib与Eko", "Gan等", "Ramaswamy"],
+    academicLiterature: [
+      {
+        label: "Hasib与Eko",
+        url: "https://doi.org/10.1007/s43681-026-01219-8",
+      },
+      { label: "Gan等", url: "https://doi.org/10.1007/s00146-026-03207-2" },
+      { label: "Ramaswamy", url: "https://doi.org/10.1007/s10846-026-02413-w" },
+    ],
   },
   apaReferences: [
-    "Council of the European Union. (2026, June 29). Artificial intelligence: Council gives final green light to simplify and streamline rules.",
-    "Cyberspace Administration of China. (2026, April 10). 人工智能拟人化互动服务管理暂行办法.",
+    {
+      text: "Council of the European Union. (2026, June 29). Artificial intelligence: Council gives final green light to simplify and streamline rules [Final legislative approval].",
+      url: "https://skribi.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/",
+    },
+    {
+      text: "Cyberspace Administration of China. (2026, April 10). 人工智能拟人化互动服务管理暂行办法 [已公布，2026年7月15日起施行].",
+      url: "https://www.cac.gov.cn/2026-04/10/c_1777558395023172.htm",
+    },
+    {
+      text: "Federal Trade Commission. (2026, July 1). Proposed policy statement concerning the suppression of accuracy in artificial intelligence systems [Proposed policy statement].",
+      url: "https://www.ftc.gov/news-events/news/press-releases/2026/07/ftc-seeks-public-comment-policy-statement-addressing-ai-accuracy",
+    },
+    {
+      text: "Gan, K. C. J., Wilczek-Stronczek, B., & Papasava, A. (2026). Governing the algorithm: A conceptual review of strategic AI oversight in global corporations. AI & Society.",
+      url: "https://doi.org/10.1007/s00146-026-03207-2",
+    },
+    {
+      text: "Hasib, M., & Eko, L. (2026). Beyond ethics washing: Evaluating the responsiveness of US, EU, and UN AI governance to expert warnings. AI and Ethics, 6, Article 375.",
+      url: "https://doi.org/10.1007/s43681-026-01219-8",
+    },
+    {
+      text: "Independent International Scientific Panel on Artificial Intelligence. (2026). Preliminary report: Evidence-based assessment of opportunities, risks and impacts of AI.",
+      url: "https://www.un.org/independent-international-scientific-panel-ai/en/preliminary-report",
+    },
+    {
+      text: "Innovation, Science and Economic Development Canada. (2026, July 23). Enhancing trust in artificial intelligence through increased transparency [Public consultation].",
+      url: "https://www.canada.ca/en/innovation-science-economic-development/news/2026/07/government-of-canada-launches-public-consultation-on-ai-transparency.html",
+    },
+    {
+      text: "Ramaswamy, S. (2026). Intelligence as managed autonomy: Failure, escalation, and governance for agentic AI systems. Journal of Intelligent & Robotic Systems.",
+      url: "https://doi.org/10.1007/s10846-026-02413-w",
+    },
   ],
   searchNotes: {
     coverage: "2026-06-27至2026-07-27",

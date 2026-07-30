@@ -34,6 +34,9 @@ export default function Home() {
           历史基线与每周增量均经过来源核验和人工审核。
         </p>
         <div className="hero-actions">
+          <Link className="button" href="/weekly/2026-07-27">
+            阅读最新周报 <span>→</span>
+          </Link>
           <Link className="button" href={`/weekly/${baselineIssue.slug}`}>
             阅读历史基线特刊 <span>→</span>
           </Link>
