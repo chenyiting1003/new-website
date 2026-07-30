@@ -13,6 +13,11 @@ export default async function Admin() {
         {[
           ["Review Queue", "/admin/review", "审核静态演示"],
           [
+            "Policy Candidates",
+            "/admin/policy-candidates",
+            "逐条审核16条缺失政策候选。",
+          ],
+          [
             "Published Records",
             "/admin/records",
             "正式记录管理将在后续阶段接入。",

@@ -13,7 +13,7 @@ export async function SiteNavigation() {
   return (
     <header className="site-header">
       <Link className="brand" href="/">
-        Mondays <i>·</i> AI治理周报
+        AI治理知识数据库 <i>·</i> governance knowledge
       </Link>
       <nav id="site-nav">
         {links.map(([label, href]) => (

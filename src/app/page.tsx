@@ -23,7 +23,7 @@ export default function Home() {
           HISTORICAL BASELINE · RESEARCH READING EDITION
         </p>
         <h1>
-          Mondays <i>·</i> AI治理周报
+          AI治理知识数据库 <i>·</i> governance knowledge
         </h1>
         <p className="lede">
           Global AI Governance Policy &amp; Research Observatory

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SiteNavigation } from "@/components/site-navigation";
 export const metadata: Metadata = {
-  title: "Mondays · AI治理周报",
+  title: "AI治理知识数据库 · governance knowledge",
   description: "Global AI Governance Policy & Research Observatory",
 };
 export default function RootLayout({
@@ -15,7 +15,9 @@ export default function RootLayout({
       <body>
         <SiteNavigation />
         {children}
-        <footer>Mondays · AI治理周报　·　本地历史基线阅读版</footer>
+        <footer>
+          AI治理知识数据库 · governance knowledge　·　本地历史基线阅读版
+        </footer>
       </body>
     </html>
   );
