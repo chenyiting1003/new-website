@@ -1,0 +1,5 @@
+relationship_id,source_actor_id,target_actor_id,relationship_type,start_year,end_year,evidence_level,directed,summary_zh,status
+oecd-g7,oecd,g7,policy_reference_diffusion,2019,,official_indirect,true,G20原则以OECD原则为基础,verified
+g7-hiroshima,g7,hiroshima-ai-process,bilateral_multilateral_cooperation,2023,,official_explicit,true,G7形成广岛AI进程框架,verified
+china-initiative,china,global-ai-governance-initiative,bilateral_multilateral_cooperation,2023,,official_explicit,true,中国提出全球人工智能治理倡议,verified
+un-governing-ai,united-nations,governing-ai-humanity,bilateral_multilateral_cooperation,2024,,official_explicit,true,联合国高级别咨询机制提出全球治理建议,verified
