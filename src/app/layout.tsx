@@ -1,3 +1,24 @@
-import type { Metadata } from "next"; import Link from "next/link"; import "./globals.css";
-export const metadata: Metadata = { title: "Mondays · AI治理周报", description: "Private AI governance research workspace" };
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="zh-CN"><body><header><Link className="brand" href="/">Mondays <i>·</i> AI治理周报</Link><nav><Link href="/">Overview</Link><Link href="/admin/review">Admin</Link><Link href="/login">登录</Link></nav></header>{children}<footer>私有研究工作区 · Phase 0–1 基础版本</footer></body></html>}
+import type { Metadata } from "next";
+import "./globals.css";
+import { SiteNavigation } from "@/components/site-navigation";
+export const metadata: Metadata = {
+  title: "AI治理知识数据库 · governance knowledge",
+  description: "Global AI Governance Policy & Research Observatory",
+};
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="zh-CN" data-scroll-behavior="smooth">
+      <body>
+        <SiteNavigation />
+        {children}
+        <footer>
+          AI治理知识数据库 · governance knowledge　·　本地历史基线阅读版
+        </footer>
+      </body>
+    </html>
+  );
+}
