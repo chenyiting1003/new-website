@@ -10,9 +10,7 @@
   "countries": {"柬埔寨": 291, "缅甸": 48},
   "tasks": [
     {"title": "新闻文件权限与结构核验", "state": "done", "detail": "文件现归 yiting 所有且权限为 640；共 1,395 篇、18 个来源，日期格式统一，文章 ID 和 URL 均无重复。"},
-    {"title": "修正 Cyber Scam Monitor 抓取器", "state": "done", "detail": "完成内容区定向解析、推荐内容排除、原始快照、校验和、断点复用、图片与来源链接独立成表。"},
     {"title": "全量抓取 339 个地点", "state": "done", "detail": "339 个页面与 767 张地点专属图片全部完成；0 页面失败、0 图片失败，并生成地点、图片、来源链接、评论与运行清单。"},
-    {"title": "接入 GitHub 研究仓库", "state": "done", "detail": "项目已推送到 chenyiting1003/new-website 的隔离分支，位于 projects/sea-cyberscam-spatial-change/；PR #9 待合并，未覆盖原有网站。"},
     {"title": "建立合法—非法变化标注规范", "state": "planned", "detail": "定义过去用途、牌照类型、转化方式、事件日期、证据文本与置信度。"},
     {"title": "试标 30 个变化案例", "state": "planned", "detail": "覆盖酒店、赌场、写字楼、公寓、大学、市场与经济特区等不同类型。"},
     {"title": "新闻地点与事件抽取", "state": "planned", "detail": "抽取文章日期、事件日期、地点、别名、企业、执法与迁移事件，并与园区实体匹配。"},
