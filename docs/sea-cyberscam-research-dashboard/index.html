@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="东南亚电诈空间变化研究计划、数据采集状态和质量审计看板">
+  <title>东南亚电诈空间变化｜研究看板</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-grid" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="brand-mark">CS</span>
+      <span>CYBER-SCAM SPATIAL CHANGE</span>
+    </a>
+    <div class="top-meta">
+      <span class="pulse"></span>
+      <span id="snapshot-date">研究快照</span>
+      <span class="timezone">UTC+8</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="eyebrow">RESEARCH OPERATIONS / 研究执行面板</div>
+      <div class="hero-grid">
+        <div>
+          <h1>合法空间如何<br><em>转化为电诈节点？</em></h1>
+          <p class="hero-copy">追踪酒店、赌场、写字楼、园区和其他城市空间从正规用途到非法活动节点的变化，并把文本、图像、坐标、牌照与新闻事件连接成可核查的时空证据链。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#plan">查看研究计划</a>
+            <a class="button ghost" href="#data">数据状态</a>
+          </div>
+        </div>
+        <div class="progress-module" aria-label="总体研究进度">
+          <div class="progress-ring" id="progress-ring"><span id="progress-value">0%</span></div>
+          <div>
+            <div class="metric-label">OVERALL PROGRESS</div>
+            <strong id="completed-tasks">0 / 0</strong>
+            <p>阶段任务已完成</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="当前重点">
+      <span>当前重点</span>
+      <div class="ticker-line"><b id="current-focus">正在读取进度…</b><i></i></div>
+    </section>
+
+    <section class="section-shell metrics" id="data">
+      <div class="section-heading">
+        <div><span class="section-no">01</span><h2>数据采集状态</h2></div>
+        <p>以来源、可追溯性和质量校验为中心，而不只统计文件数量。</p>
+      </div>
+      <div class="metric-grid" id="metric-grid"></div>
+      <div class="coverage-panel">
+        <div>
+          <div class="panel-kicker">GEOGRAPHIC COVERAGE</div>
+          <h3>网站当前覆盖</h3>
+          <p>当前 Cyber Scam Monitor 数据以柬埔寨与缅甸为主。后续通过新闻数据扩展区域范围。</p>
+        </div>
+        <div class="country-bars" id="country-bars"></div>
+      </div>
+    </section>
+
+    <section class="section-shell plan" id="plan">
+      <div class="section-heading">
+        <div><span class="section-no">02</span><h2>研究计划与进度</h2></div>
+        <div class="filters" role="group" aria-label="筛选阶段状态">
+          <button class="filter active" data-filter="all">全部</button>
+          <button class="filter" data-filter="done">已完成</button>
+          <button class="filter" data-filter="active">进行中</button>
+          <button class="filter" data-filter="blocked">受阻</button>
+          <button class="filter" data-filter="planned">待开始</button>
+        </div>
+      </div>
+      <div class="task-list" id="task-list"></div>
+    </section>
+
+    <section class="section-shell audit" id="audit">
+      <div class="section-heading">
+        <div><span class="section-no">03</span><h2>质量审计</h2></div>
+        <p>任何无法回到原始页面、图片或新闻来源的结论，都不会进入最终分析层。</p>
+      </div>
+      <div class="audit-grid" id="audit-grid"></div>
+    </section>
+
+    <section class="section-shell evidence">
+      <div class="section-heading">
+        <div><span class="section-no">04</span><h2>目标数据结构</h2></div>
+        <p>一个地点可以拥有多个名称、功能、事件、来源与时间节点。</p>
+      </div>
+      <div class="schema-flow">
+        <article><span>01</span><b>地点 Sites</b><p>坐标、行政区、别名</p></article>
+        <i>→</i>
+        <article><span>02</span><b>变化 Transitions</b><p>过去用途、合法身份、转化方式</p></article>
+        <i>→</i>
+        <article><span>03</span><b>事件 Events</b><p>运营、突袭、撤牌、关闭、迁移</p></article>
+        <i>→</i>
+        <article><span>04</span><b>证据 Evidence</b><p>文本、图像、新闻、牌照</p></article>
+      </div>
+    </section>
+
+    <section class="section-shell blockers" id="blockers">
+      <div class="section-heading">
+        <div><span class="section-no">05</span><h2>需要处理的问题</h2></div>
+        <p>这里只展示会影响下一阶段的真实阻塞项。</p>
+      </div>
+      <div id="blocker-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div><b>SEA CYBER-SCAM SPATIAL CHANGE</b><span>非商业研究项目</span></div>
+    <p>数据来源保留原始署名；Cyber Scam Monitor 内容许可标注为 CC BY-NC-ND 4.0。</p>
+    <a href="https://cyberscammonitor.net/" target="_blank" rel="noreferrer">SOURCE ↗</a>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
