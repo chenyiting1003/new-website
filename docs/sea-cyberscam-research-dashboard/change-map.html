@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN" class="access-locked">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="东南亚电诈地点年度状态与空间变化交互地图">
+  <title>年度空间变化地图｜东南亚电诈研究</title>
+  <link rel="stylesheet" href="change-map.css">
+  <link rel="stylesheet" href="access.css">
+  <script src="access.js"></script>
+</head>
+<body>
+  <header class="map-topbar">
+    <a class="map-brand" href="index.html" aria-label="返回研究看板">
+      <span class="map-brand-mark">CS</span>
+      <span>空间变化地图</span>
+    </a>
+    <span class="local-mode"><i></i>LOCAL DATA MODE</span>
+  </header>
+
+  <main>
+    <section class="map-intro">
+      <div>
+        <p class="eyebrow">SPATIAL TRANSITION EXPLORER</p>
+        <h1>地点状态如何随年份变化？</h1>
+        <p>使用本地研究数据生成地图。地点级数据只在当前浏览器标签页内解析，不会上传或写入 GitHub。</p>
+      </div>
+      <label class="file-control" for="data-files">
+        <span>载入分析数据</span>
+        <small>同时选择 site_change_summary.csv 与 site_change_evidence.csv</small>
+        <input id="data-files" type="file" accept=".csv,text/csv" multiple>
+      </label>
+    </section>
+
+    <section class="timeline-panel" aria-label="地图时间控制">
+      <div class="timeline-head">
+        <div>
+          <span class="control-label">观察年份</span>
+          <strong id="year-output">等待数据</strong>
+        </div>
+        <div class="timeline-actions">
+          <button id="play-button" type="button" disabled aria-pressed="false">播放</button>
+          <label><input id="candidate-only" type="checkbox" checked disabled> 仅显示有证据地点</label>
+          <label>国家
+            <select id="country-filter" disabled>
+              <option value="all">全部</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <input id="year-slider" type="range" min="2015" max="2026" value="2026" step="1" disabled aria-label="观察年份">
+      <div class="timeline-scale"><span id="year-min">—</span><span id="year-max">—</span></div>
+    </section>
+
+    <section class="map-stats" aria-live="polite">
+      <div><span>当前可见</span><strong id="visible-count">0</strong></div>
+      <div><span>本年转化</span><strong id="transition-count">0</strong></div>
+      <div><span>本年搬迁</span><strong id="relocation-count">0</strong></div>
+      <p id="load-status">请选择两张 CSV。候选地点表不是必需文件。</p>
+    </section>
+
+    <section class="map-workspace">
+      <div id="map" role="application" aria-label="地点年度状态交互地图"></div>
+      <aside class="site-detail" id="site-detail" aria-live="polite">
+        <div class="detail-empty">
+          <span>SELECT A SITE</span>
+          <h2>点击地图点位查看变化链</h2>
+          <p>有明确日期的证据按年排列；时间不明的证据单独列出，不参与状态先后推断。</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="legend" aria-label="地图图例">
+      <div><i class="legend-dot unknown">·</i><span>未观察到有日期证据</span></div>
+      <div><i class="legend-dot formal">正</i><span>正规身份／前置状态</span></div>
+      <div><i class="legend-dot transition">变</i><span>本年转化或接管</span></div>
+      <div><i class="legend-dot relocation">移</i><span>本年搬迁或撤离</span></div>
+      <div><i class="legend-dot illicit">诈</i><span>已有非法活动报告</span></div>
+    </section>
+
+    <section class="method-note">
+      <b>判读规则</b>
+      <p>颜色仅由肯定且带明确日期的证据推导。“本年”按日期精度可能代表同一年或同一月，并不自动等同于同一天。灰色不是“没有活动”，而是当前年份之前没有可排序证据。</p>
+      <p>底图瓦片由 OpenStreetMap 提供，瓦片服务会收到常规地图视窗请求；所选 CSV 与地点明细不会被页面上传。</p>
+    </section>
+  </main>
+
+  <script src="change-map.js"></script>
+</body>
+</html>
