@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0.0",
+  "release_id": "eb8a5fed1f16",
+  "generated_at": "2026-10-16T01:57:35.823880+00:00",
+  "year_range": [
+    2015,
+    2026
+  ],
+  "counts": {
+    "sites": 339,
+    "articles": 1395,
+    "relevant_articles": 998,
+    "unique_relevant_contents": 998,
+    "news_events": 8777,
+    "csm_events": 598,
+    "descriptions": 3497,
+    "description_direct": 31,
+    "description_context": 259,
+    "description_unmatched": 3207,
+    "sites_with_news": 33,
+    "images": 767,
+    "unique_images": 622,
+    "casino_references": 195,
+    "casino_candidates": 123,
+    "casino_name_linked_sites": 77
+  },
+  "countries": {
+    "Cambodia": 291,
+    "Myanmar": 48
+  },
+  "languages": {
+    "zh": 712,
+    "en": 286
+  },
+  "description_dimensions": {
+    "harm": 1295,
+    "scale": 2310,
+    "brutality": 276,
+    "living_conditions": 30
+  },
+  "publication_years": [
+    {
+      "year": 2024,
+      "articles": 95,
+      "sources": 12
+    },
+    {
+      "year": 2025,
+      "articles": 257,
+      "sources": 16
+    },
+    {
+      "year": 2026,
+      "articles": 646,
+      "sources": 17
+    }
+  ],
+  "checks": {
+    "sites_unique_ids": true,
+    "site_aliases_unique_ids": true,
+    "articles_unique_ids": true,
+    "article_site_links_unique_ids": true,
+    "events_unique_ids": true,
+    "event_site_links_unique_ids": true,
+    "descriptions_unique_ids": true,
+    "description_site_links_unique_ids": true,
+    "images_unique_ids": true,
+    "casinos_unique_ids": true,
+    "casino_site_candidates_unique_ids": true,
+    "external_source_links_unique_ids": true,
+    "all_339_sites_preserved": true,
+    "all_coordinates_valid": true,
+    "all_site_links_resolve": true,
+    "event_link_targets_resolve": true,
+    "description_link_targets_resolve": true,
+    "all_news_targets_resolve": true,
+    "context_candidates_excluded_from_direct": true,
+    "unknown_or_inferred_dates_excluded": true
+  },
+  "limitations": [
+    "Description keywords are retrieval candidates, not severity scores.",
+    "Media-source counts do not establish editorial independence; identical body/URL records share a dedup group; paraphrased syndication is unresolved.",
+    "Casino location lists do not prove licence validity on an event date.",
+    "Image/OCR clues are a cross-sectional inventory; historical image change is not yet confirmed.",
+    "No-match means no detected link under these rules, not an absence of activity."
+  ]
+}

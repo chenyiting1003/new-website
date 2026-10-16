@@ -1,0 +1,26 @@
+.access-locked body > :not(.access-gate) { visibility: hidden !important; }
+.access-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  visibility: visible !important;
+  background: #171b20;
+  color: #f4f0e8;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.access-box { width: min(440px, 100%); border-top: 5px solid #f0442f; padding-top: 26px; }
+.access-kicker { color: #f0442f; font: 800 11px/1 monospace; letter-spacing: .15em; }
+.access-box h1 { margin: 14px 0 12px; color: #f4f0e8; font-size: clamp(32px,7vw,54px); line-height: 1; letter-spacing: -.05em; }
+.access-box p { color: #aaa; font-size: 13px; line-height: 1.65; }
+.access-box form { display: grid; grid-template-columns: 1fr auto; margin-top: 28px; }
+.access-box label { grid-column: 1 / -1; margin-bottom: 8px; font: 700 11px/1 monospace; letter-spacing: .08em; }
+.access-box input { min-width: 0; border: 1px solid #f4f0e8; background: transparent; color: #f4f0e8; padding: 13px; font: 700 18px/1 monospace; letter-spacing: .12em; }
+.access-box button { border: 1px solid #f4f0e8; border-left: 0; background: #f4f0e8; color: #171b20; padding: 0 18px; font-weight: 800; }
+.access-error { min-height: 22px; margin-top: 9px !important; color: #ff7666 !important; }
+@media (max-width: 480px) {
+  .access-box form { grid-template-columns: 1fr; gap: 8px; }
+  .access-box button { min-height: 46px; border-left: 1px solid #f4f0e8; }
+}

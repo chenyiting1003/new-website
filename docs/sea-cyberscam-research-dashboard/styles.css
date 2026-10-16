@@ -136,3 +136,9 @@ footer div { display:flex; flex-direction:column; gap:5px; } footer span, footer
   .blocker { grid-template-columns:14px 1fr; }
   .blocker code { grid-column:2; }
 }
+/* Acquisition cards are summary-only; no source records are bundled. */
+.acquisition-header{margin-top:44px}.acquisition-header h3{font-size:26px;margin:10px 0}.acquisition-header p,.acquisition-note,.acquisition-next p{color:#67716f;line-height:1.8}
+.dataset-layers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0}.dataset-layers article{padding:20px;border:1px solid #d9ded8;background:#f3f6f0}.dataset-layers p{font-size:14px;line-height:1.75;margin-bottom:0}
+.acquisition-workflow{display:flex;flex-wrap:wrap;gap:14px 32px;padding:20px 20px 20px 40px;background:#f5f0e5;font-size:13px}
+.acquisition-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.acquisition-card{padding:24px;border:1px solid #d9ded8;border-top:3px solid #16877a;background:#fff}.acquisition-card[data-state="blocked"]{border-top-color:#a85d31}.acquisition-card[data-state="active"]{border-top-color:#c19c42}.acquisition-card-top{display:flex;justify-content:space-between;font-size:12px;color:#67716f}.acquisition-card h4{font-size:20px;line-height:1.4;margin:18px 0 12px}.acquisition-card p,.acquisition-card dd{font-size:14px;line-height:1.7;color:#53605a}.acquisition-card dt{font-size:11px;letter-spacing:.05em;margin-top:13px;color:#88928b}.acquisition-card dd{margin:4px 0}.acquisition-card a{display:inline-block;margin-top:15px;color:#08736d}.acquisition-next{margin-top:22px;padding:18px;border:1px solid #d9ded8}.acquisition-next summary{cursor:pointer}
+@media(max-width:1000px){.acquisition-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.acquisition-grid,.dataset-layers{grid-template-columns:1fr}}

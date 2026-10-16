@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-16 10:11 CST",
+  "downloaded_files": 364,
+  "downloaded_bytes": 1798686170,
+  "sources": [
+    {
+      "priority": "01",
+      "title": "NASA VNP46A3 V2 月度夜光",
+      "state": "blocked",
+      "status": "目录完成 · 原件待授权",
+      "result": "已检索六国空间包络内 1,584 个候选瓦片；首个 HDF5 请求返回 401。",
+      "coverage": "约 500 米；2012 年起月度；当前清单至 2026-10",
+      "processed": "保存集合元数据、AOI、文件 URL、日期与大小；尚未把包络误当国家掩膜。",
+      "next": "提供 Earthdata／LAADS 下载令牌后批量获取，再按国家边界裁切和质量波段筛选。",
+      "url": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A3"
+    },
+    {
+      "priority": "02",
+      "title": "WorldPop Global2 100 米人口",
+      "state": "active",
+      "status": "45 / 96 国别年度栅格已校验",
+      "result": "KHM 16/16；LAO 13/16；MMR 13/16；THA 3/16",
+      "coverage": "六国 2015—2030；2025 年后含预测；马来西亚原件为全国",
+      "processed": "逐文件 SHA-256、CRS、范围、像元数、NoData 与数据类型审计。",
+      "next": "补齐后裁切马来西亚半岛；按模型估计／预测分层，不能写成实测人口。",
+      "url": "https://hub.worldpop.org/geodata/listing?id=135"
+    },
+    {
+      "priority": "03",
+      "title": "柬埔寨 2019 人口普查",
+      "state": "active",
+      "status": "报告、元数据与优先表已下载",
+      "result": "304 页国家报告及含 61 个表块的 A—H 工作簿已归档；MEF 接口仅 112 行且混合区级和分区级汇总，不能当全国乡级面板。",
+      "coverage": "2019；微观数据含乡字段但为许可申请访问",
+      "processed": "PDF、A—H Excel、DDI／JSON 元数据和 MEF 原响应均保存；工作簿已做表块清单。",
+      "next": "逐表解析正式工作簿；从获批微观数据或其他正式表建立全国 commune 编码。",
+      "url": "https://microdata.nis.gov.kh/index.php/catalog/39"
+    },
+    {
+      "priority": "04",
+      "title": "柬埔寨 NCDD／NIS Commune Database",
+      "state": "active",
+      "status": "公开省级面板已采集",
+      "result": "2022—2025、全国及 25 个省、人口与经济两个主题已下载；整理 48,464 个未统一指标值。",
+      "coverage": "公开页面实际为全国／省级；未证实开放 commune 逐行下载",
+      "processed": "原始 JSON、地点代码、年份、原指标名与 null 值均保留；没有把空值改成 0。",
+      "next": "补数据字典、单位和缺失率；另行确认登录后是否提供 commune 下载。",
+      "url": "https://cdb.nis.gov.kh/"
+    },
+    {
+      "priority": "05",
+      "title": "柬埔寨 2022 经济普查",
+      "state": "active",
+      "status": "正式报告已下载",
+      "result": "11.46 MB 英文正式报告已校验并转为可检索文本；CSES 2023 报告也已归档。",
+      "coverage": "报告以省级公开表为主；不等于企业坐标或乡级微观数据",
+      "processed": "保留 PDF、文本、来源 URL、抓取时间、大小与 SHA-256。",
+      "next": "抽取 establishments、persons engaged、sales、expenses、ISIC，建立省 × 指标长表。",
+      "url": "https://www.nis.gov.kh/nis/EC2022/National%20Report%20on%20Final%20Census%20Results%20Economic%20Census%20of%20Cambodia%202022.pdf"
+    },
+    {
+      "priority": "06",
+      "title": "缅甸 MIMU 2026 基线",
+      "state": "blocked",
+      "status": "6 个公开文件被站点拦截",
+      "result": "经济、人口、全国、掸邦、克伦邦和交通文件入口均已核实，但自动下载返回 Cloudflare 403。",
+      "coverage": "文件版本 2026-01-30；每项指标的实际观测年不同",
+      "processed": "记录精确文件名、入口、失败状态与时间；没有把版本日期当观测年份。",
+      "next": "从已登录浏览器手工下载到本地，或由 MIMU 提供直接访问后解析工作表与 P-code。",
+      "url": "https://themimu.info/gis-resources"
+    },
+    {
+      "priority": "补充",
+      "title": "缅甸 2014 镇区普查基线",
+      "state": "done",
+      "status": "99 / 99 文件已校验",
+      "result": "从 UNFPA 官方入口采集克伦邦 16 个和掸邦 82 个不重复的英文镇区／子镇区报告，并加入全国普查地图集。",
+      "coverage": "2014 历史基线；镇区／子镇区；不是当前人口",
+      "processed": "全部转为可检索文本，共 5,823 页；保存 URL、哈希、州别与语言清单。",
+      "next": "抽取人口、住房、就业与公共服务指标；与 MIMU P-code 对齐后再做跨年连接。",
+      "url": "https://myanmar.unfpa.org/en/publications/census-township-reports"
+    }
+  ],
+  "rules": [
+    "下载不等于分析就绪",
+    "官方行政统计不降尺度伪造",
+    "模型人口与实际调查分开",
+    "报告日期、参考期与预测期分开",
+    "详细数据不进入网站仓库"
+  ]
+}

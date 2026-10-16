@@ -1,11 +1,13 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="access-locked">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="东南亚电诈空间变化研究计划、数据采集状态和质量审计看板">
   <title>东南亚电诈空间变化｜研究看板</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="access.css">
+  <script src="access.js"></script>
 </head>
 <body>
   <div class="page-grid" aria-hidden="true"></div>
@@ -31,6 +33,7 @@
           <div class="hero-actions">
             <a class="button primary" href="#plan">查看研究计划</a>
             <a class="button ghost" href="#data">数据状态</a>
+            <a class="button ghost" href="change-map.html">打开变化地图</a>
           </div>
         </div>
         <div class="progress-module" aria-label="总体研究进度">
@@ -63,6 +66,16 @@
         </div>
         <div class="country-bars" id="country-bars"></div>
       </div>
+      <div class="acquisition-header"><div class="panel-kicker">POPULATION · ECONOMY · URBAN ACTIVITY</div><h3>六国人口与经济数据采集</h3><p>柬埔寨、缅甸优先；老挝、泰国、越南和马来西亚半岛用于跨境比较。下载文件不等于可分析面板。</p></div>
+      <div class="dataset-layers">
+        <article><b>A · 区域社会经济面板</b><p>行政单元 × 年份。保留官方原尺度、统计口径和边界版本，不下推到 100 米。</p></article>
+        <article><b>B · 网格城市活动面板</b><p>500 米／1 公里 × 月份。人口是年度模型值，夜光是月度代理指标，不伪造月度人口。</p></article>
+        <article><b>C · 园区事件数据库</b><p>园区 × 事件时间。区分文章日期、事件日期和时间精度，再连接区域与网格。</p></article>
+      </div>
+      <ol class="acquisition-workflow"><li>核实来源与许可</li><li>下载原件与校验哈希</li><li>检查字段、缺失与年份</li><li>对齐行政编码／空间范围</li><li>质量筛选与空间连接</li><li>评估面板与研究设计</li></ol>
+      <p id="acquisition-snapshot" class="acquisition-note">正在读取采集快照…</p>
+      <div id="acquisition-grid" class="acquisition-grid"></div>
+      <details class="acquisition-next"><summary>后续数据与研究边界</summary><p>继续补齐柬埔寨人口普查与家庭调查、缅甸 2014 镇区普查及 P-code 历史；随后接入泰国 DOPA／GPP、老挝普查、越南省级统计、马来西亚县级人口与 GDP、GHSL／Dynamic World。均需逐项核验，未标记为已经下载。</p><p>跨国栅格统一前先固定国家掩膜与等面积网格；人口计数使用守恒聚合，夜光保留质量标记、有效观测数与缺测。马来西亚国家原件必须排除东马后才能进入研究层。战争、停电、迁移与边境贸易是混杂因素，不能把夜光变化直接解释为园区的经济影响。</p></details>
     </section>
 
     <section class="section-shell plan" id="plan">
@@ -118,5 +131,6 @@
     <a href="https://cyberscammonitor.net/" target="_blank" rel="noreferrer">SOURCE ↗</a>
   </footer>
   <script src="app.js"></script>
+  <script src="acquisition.js"></script>
 </body>
 </html>
