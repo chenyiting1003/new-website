@@ -1,350 +1,74 @@
-const stateMeta = {
-  unknown: {label: '未观察到有日期证据', glyph: '·'},
-  formal: {label: '正规身份／前置状态', glyph: '正'},
-  transition: {label: '本年转化或接管', glyph: '变'},
-  relocation: {label: '本年搬迁或撤离', glyph: '移'},
-  illicit: {label: '已有非法活动报告', glyph: '诈'}
-};
-
-const app = {
-  map: null,
-  sites: [],
-  eventsBySite: new Map(),
-  markers: new Map(),
-  selectedId: null,
-  playTimer: null,
-  minYear: 2015,
-  maxYear: 2026
-};
-
-const el = id => document.getElementById(id);
-
-class LocalPointMap {
-  constructor(container) {
-    this.container = container;
-    this.center = {lat: 14.2, lon: 102.7};
-    this.zoom = 6;
-    this.drag = null;
-    this.tilePane = document.createElement('div');
-    this.markerPane = document.createElement('div');
-    this.tilePane.className = 'map-tile-pane';
-    this.markerPane.className = 'map-marker-pane';
-    container.append(this.tilePane, this.markerPane);
-    this.addControls();
-    this.bindEvents();
-    new ResizeObserver(() => this.render()).observe(container);
-    this.render();
-  }
-
-  addControls() {
-    const controls = document.createElement('div');
-    controls.className = 'map-controls';
-    controls.innerHTML = '<button type="button" aria-label="放大地图">+</button><button type="button" aria-label="缩小地图">−</button>';
-    controls.children[0].addEventListener('click', () => this.setZoom(this.zoom + 1));
-    controls.children[1].addEventListener('click', () => this.setZoom(this.zoom - 1));
-    const attribution = document.createElement('div');
-    attribution.className = 'map-attribution';
-    attribution.innerHTML = '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a>';
-    this.container.append(controls, attribution);
-  }
-
-  bindEvents() {
-    this.container.addEventListener('pointerdown', event => {
-      if (event.target.closest('button, a')) return;
-      this.drag = {x: event.clientX, y: event.clientY, center: this.project(this.center.lat, this.center.lon)};
-      this.container.setPointerCapture(event.pointerId);
-    });
-    this.container.addEventListener('pointermove', event => {
-      if (!this.drag) return;
-      const dx = event.clientX - this.drag.x;
-      const dy = event.clientY - this.drag.y;
-      this.center = this.unproject(this.drag.center.x - dx, this.drag.center.y - dy);
-      this.render();
-    });
-    const endDrag = () => { this.drag = null; };
-    this.container.addEventListener('pointerup', endDrag);
-    this.container.addEventListener('pointercancel', endDrag);
-    this.container.addEventListener('wheel', event => {
-      event.preventDefault();
-      this.setZoom(this.zoom + (event.deltaY < 0 ? 1 : -1));
-    }, {passive: false});
-  }
-
-  worldSize(zoom = this.zoom) { return 256 * 2 ** zoom; }
-
-  project(lat, lon, zoom = this.zoom) {
-    const size = this.worldSize(zoom);
-    const limitedLat = Math.max(-85.0511, Math.min(85.0511, Number(lat)));
-    const sin = Math.sin(limitedLat * Math.PI / 180);
-    return {
-      x: (Number(lon) + 180) / 360 * size,
-      y: (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * size
-    };
-  }
-
-  unproject(x, y, zoom = this.zoom) {
-    const size = this.worldSize(zoom);
-    const lon = x / size * 360 - 180;
-    const n = Math.PI - 2 * Math.PI * y / size;
-    return {lat: 180 / Math.PI * Math.atan(Math.sinh(n)), lon};
-  }
-
-  setZoom(value) {
-    this.zoom = Math.max(4, Math.min(12, Math.round(value)));
-    this.render();
-  }
-
-  fit(sites) {
-    if (!sites.length) return;
-    const pointsAtZero = sites.map(site => this.project(site.latitude, site.longitude, 0));
-    const xs = pointsAtZero.map(point => point.x);
-    const ys = pointsAtZero.map(point => point.y);
-    const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
-    const width = Math.max(320, this.container.clientWidth) - 80;
-    const height = Math.max(420, this.container.clientHeight) - 80;
-    let zoom = 10;
-    while (zoom > 4 && ((maxX - minX) * 2 ** zoom > width || (maxY - minY) * 2 ** zoom > height)) zoom -= 1;
-    this.zoom = zoom;
-    this.center = this.unproject((minX + maxX) / 2 * 2 ** zoom, (minY + maxY) / 2 * 2 ** zoom, zoom);
-    this.render();
-  }
-
-  renderTiles(left, top, width, height) {
-    const tileSize = 256;
-    const count = 2 ** this.zoom;
-    const minX = Math.floor(left / tileSize), maxX = Math.floor((left + width) / tileSize);
-    const minY = Math.max(0, Math.floor(top / tileSize)), maxY = Math.min(count - 1, Math.floor((top + height) / tileSize));
-    const fragment = document.createDocumentFragment();
-    for (let x = minX; x <= maxX; x += 1) {
-      for (let y = minY; y <= maxY; y += 1) {
-        const wrappedX = ((x % count) + count) % count;
-        const image = document.createElement('img');
-        image.className = 'map-tile';
-        image.alt = '';
-        image.draggable = false;
-        image.src = `https://tile.openstreetmap.org/${this.zoom}/${wrappedX}/${y}.png`;
-        image.style.left = `${x * tileSize - left}px`;
-        image.style.top = `${y * tileSize - top}px`;
-        fragment.append(image);
-      }
-    }
-    this.tilePane.replaceChildren(fragment);
-  }
-
-  render() {
-    const width = this.container.clientWidth;
-    const height = this.container.clientHeight;
-    if (!width || !height) return;
-    const center = this.project(this.center.lat, this.center.lon);
-    const left = center.x - width / 2;
-    const top = center.y - height / 2;
-    this.renderTiles(left, top, width, height);
-    app.sites.forEach(site => {
-      const marker = app.markers.get(site.site_id);
-      if (!marker || marker.hidden) return;
-      const point = this.project(site.latitude, site.longitude);
-      marker.style.left = `${point.x - left}px`;
-      marker.style.top = `${point.y - top}px`;
-    });
-  }
+'use strict';
+const M=ResearchModel, el=id=>document.getElementById(id);
+const dims={brutality:'残忍描述',harm:'危害描述',scale:'规模描述',living_conditions:'生活条件'};
+const langs={zh:'中文',en:'英文',km:'高棉文',undetermined:'未确定'};
+const types={past_use:'过去用途',licence_or_registration:'牌照／注册',reported_illicit_activity:'涉诈活动报告',illicit_activity:'涉诈活动报告',use_change:'用途／接管变化',conversion_or_takeover:'用途／接管变化',location_change:'搬迁／撤离',relocation:'搬迁／撤离',built_environment_change:'建筑变化',construction_or_security_change:'建筑／围合变化',operational_change:'运营变化',closure_or_opening:'关闭／开业',enforcement:'执法行动'};
+const app={data:null,summary:null,selected:null,timer:null,visible:[],rows:[]};
+const safe=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=n=>Number(n||0).toLocaleString('zh-CN');
+const y=()=>Number(el('year-slider').value);
+const opts=()=>({attributed:el('attributed').checked,origin:el('origin-filter').value});
+function link(url,label){try{const u=new URL(url);if(!['http:','https:'].includes(u.protocol))return '';return `<a href="${safe(u.href)}" target="_blank" rel="noreferrer">${safe(label)} ↗</a>`;}catch{return '';}}
+function bars(id,rows){const max=Math.max(1,...rows.map(r=>r.value));el(id).innerHTML=rows.length?rows.map(r=>`<${r.id?'button':'div'} class="bar-row" ${r.id?`type="button" data-site="${safe(r.id)}"`:''}><span title="${safe(r.label)}">${safe(r.label)}</span><i><b style="width:${r.value/max*100}%"></b></i><strong>${num(r.value)}</strong></${r.id?'button':'div'}>`).join(''):'<p class="empty-note">当前范围没有记录</p>';}
+function overview(s){app.summary=s;const c=s.counts;
+ el('overview').innerHTML=[['地点',c.sites,'柬埔寨 / 缅甸'],['相关新闻',c.relevant_articles,'保留发表时间与语言'],['描述证据句',c.descriptions,'包含无法匹配的材料'],['图片 / 独立资产',`${c.images} / ${c.unique_images}`,'按 SHA-256 识别重复'],['赌场参考点',c.casino_references,'牌照有效性仍需核验']].map(([l,v,n])=>`<article><span>${safe(l)}</span><strong>${typeof v==='number'?num(v):safe(v)}</strong><small>${safe(n)}</small></article>`).join('');
+ bars('global-years',s.publication_years.map(r=>({label:String(r.year),value:r.articles})));
+ bars('global-dimensions',Object.entries(dims).map(([k,l])=>({label:l,value:s.description_dimensions[k]||0})));
+ bars('global-matches',[{label:'直接关联',value:c.description_direct},{label:'上下文候选',value:c.description_context},{label:'无法匹配',value:c.description_unmatched}]);
+ el('coverage-note').textContent=`${c.sites_with_news} 个地点有明确名称匹配的报道；其余报道保存在全样本层。`;
+ el('release-label').textContent=`数据版本 ${s.schema_version} · ${s.release_id}`;
 }
-
-function parseCsv(text) {
-  const rows = [];
-  let row = [], field = '', quoted = false;
-  const source = text.replace(/^\uFEFF/, '');
-  for (let i = 0; i < source.length; i += 1) {
-    const char = source[i];
-    if (quoted) {
-      if (char === '"' && source[i + 1] === '"') { field += '"'; i += 1; }
-      else if (char === '"') quoted = false;
-      else field += char;
-    } else if (char === '"') quoted = true;
-    else if (char === ',') { row.push(field); field = ''; }
-    else if (char === '\n') { row.push(field.replace(/\r$/, '')); rows.push(row); row = []; field = ''; }
-    else field += char;
-  }
-  if (field.length || row.length) { row.push(field.replace(/\r$/, '')); rows.push(row); }
-  const headers = rows.shift() || [];
-  return rows.filter(values => values.some(Boolean)).map(values => Object.fromEntries(headers.map((header, index) => [header, values[index] || ''])));
+function reports(s){const source=el('source-filter').value,language=el('language-filter').value;return M.reportsFor(s,y(),el('time-mode').value).filter(a=>(source==='all'||a.source===source)&&(language==='all'||a.language===language));}
+function stat(s){const selected=reports(s),ids=new Set(selected.map(a=>a.article_id)),desc=(s.descriptions||[]).filter(d=>ids.has(d.article_id)&&(d.accepted||el('context-links').checked));return {reports:new Set(selected.map(a=>a.dedup_group)).size,records:selected.length,sources:new Set(selected.map(a=>a.source)).size,languages:[...new Set(selected.map(a=>a.language))].sort(),dimensions:Object.fromEntries(Object.keys(dims).map(k=>[k,desc.filter(d=>d.dimensions.includes(k)).length]))};}
+function visible(){const q=el('search').value.trim().toLocaleLowerCase(),country=el('country-filter').value,source=el('source-filter').value,language=el('language-filter').value;
+ return app.data.sites.filter(s=>{const selected=reports(s);return (!q||[s.name,s.province,...s.aliases].join(' ').toLocaleLowerCase().includes(q))&&(country==='all'||s.country===country)&&(!el('candidate-only').checked||s.event_count||s.article_records)&&(source==='all'&&language==='all'||selected.length>0);});}
+function select(id,focus=false){app.selected=id;render();if(focus)map.focus(id);}
+const map=new ResearchMapCanvas(el('map'),id=>select(id));
+function render(){if(!app.data)return;app.visible=visible();const mode=el('layer').value;
+ const rows=app.visible.map(s=>({s,state:M.stateFor(s,y(),opts()),stats:stat(s)}));app.rows=rows;
+ const value=r=>mode==='attention'?r.stats.reports:mode==='images'?r.s.image_function_clue_count:mode==='casino'?r.s.casino_name_candidates:r.stats.dimensions[mode]||0;
+ const max=Math.max(1,...rows.map(value));
+ map.setPoints(rows.map(r=>{const n=value(r),isState=mode==='state',m=M.meta[r.state];return {id:r.s.site_id,lat:r.s.latitude,lon:r.s.longitude,state:isState?r.state:'metric',selected:app.selected===r.s.site_id,
+  glyph:isState?m[1]:n||'·',color:isState?m[2]:n?`hsl(${mode==='casino'?38:mode==='images'?266:172} 55% ${50-23*Math.sqrt(n/max)}%)`:'#969da0',size:isState?27:22+23*Math.sqrt(n/max),label:`${r.s.name} · ${isState?m[0]:n+' 条／篇'} · ${y()} 年`};}));
+ el('year-output').textContent=y();el('visible-count').textContent=rows.length;
+ el('transition-count').textContent=rows.filter(r=>r.state==='transition').length;
+ el('relocation-count').textContent=rows.filter(r=>r.state==='relocation').length;
+ const articles=rows.flatMap(r=>reports(r.s));el('report-count').textContent=`${new Set(articles.map(a=>a.dedup_group)).size} / ${new Set(articles.map(a=>a.source)).size}`;
+ el('legend').innerHTML=mode==='state'?Object.entries(M.meta).map(([k,[l,g,c]])=>`<div><i class="legend-dot" style="background:${c}">${g}</i><span>${l}</span></div>`).join(''):'<p>圆点大小与颜色深浅表示数量；灰点表示当前层无记录。它不表示程度评分。</p>';
+ el('layer-note').textContent=mode==='casino'?'当前资料快照：名称＋坐标候选数量。仅距离接近的候选见地点详情。此层不表示历史牌照有效状态。':mode==='images'?'当前资料快照：具有建筑功能文字线索的图片数量。图像拍摄日期与历史建筑变化尚未完成核验。':mode==='state'?'事件发生时间：颜色由肯定、直接关联且具有明确日期的证据推导。年份推断和无日期证据保留在详情。':`报道发表时间：${el('time-mode').value==='year'?'仅 '+y()+' 年':'截至 '+y()+' 年'}。${mode==='attention'?'按同网址或同正文去重；媒体数仍可能包含转载。':`当前描述范围：${el('context-links').checked?'直接关联＋上下文候选':'直接关联'}。`}`;
+ if(app.selected&&!rows.some(r=>r.s.site_id===app.selected))app.selected=null;
+ renderDetail();
+ bars('attention-chart',[...rows].filter(r=>r.stats.reports).sort((a,b)=>b.stats.reports-a.stats.reports).slice(0,10).map(r=>({label:r.s.name,value:r.stats.reports,id:r.s.site_id})));
+ bars('description-chart',Object.entries(dims).map(([k,label])=>({label,value:rows.reduce((n,r)=>n+r.stats.dimensions[k],0)})));
+ const ey=new Map();for(const r of rows)for(const e of M.eligibleEvents(r.s,opts())){const t=M.year(e.start);if(t<=y())ey.set(t,(ey.get(t)||0)+1);}
+ bars('event-chart',[...ey].sort((a,b)=>a[0]-b[0]).map(([year,value])=>({label:String(year),value})));
+ el('site-table').innerHTML=[...rows].sort((a,b)=>b.stats.reports-a.stats.reports||a.s.name.localeCompare(b.s.name)).map(r=>`<tr><td><button class="text-button" data-site="${safe(r.s.site_id)}">${safe(r.s.name)}</button><small>${safe(r.s.country)} · ${safe(r.s.province)}</small></td><td><span class="status-label" style="color:${M.meta[r.state][2]}">${safe(M.meta[r.state][0])}</span></td><td>${r.stats.reports}</td><td>${r.stats.sources}</td><td>${r.stats.languages.map(l=>langs[l]||l).join(' / ')||'—'}</td><td>${r.stats.dimensions.brutality+r.stats.dimensions.harm+r.stats.dimensions.scale+r.stats.dimensions.living_conditions}</td><td>${r.s.casino_name_candidates}</td><td>${r.s.image_count}</td></tr>`).join('')||'<tr><td colspan="8">当前筛选没有地点。可点击“重置筛选”。</td></tr>';
 }
-
-function yearOf(value) {
-  const match = String(value || '').match(/^(20\d{2})/);
-  return match ? Number(match[1]) : null;
+function renderDetail(){const s=app.data?.sites.find(s=>s.site_id===app.selected);if(!s){el('site-detail').innerHTML='<div class="detail-empty"><span>SELECT A SITE</span><h2>选择园区，查看证据。</h2><p>点击地图、关注度条形图或地点列表。</p></div>';return;}
+ const stats=stat(s),state=M.stateFor(s,y(),opts()),reports=reportsForSite(s);
+ const events=s.events.filter(e=>(!M.year(e.start)||M.year(e.start)<=y())&&(el('origin-filter').value==='all'||e.origin===el('origin-filter').value)).sort((a,b)=>(a.start||'9999').localeCompare(b.start||'9999'));
+ const ds=s.descriptions.filter(d=>reports.some(a=>a.article_id===d.article_id));
+ const eventHtml=events.map(e=>`<article class="detail-event"><time>${safe(e.start||'日期不明')}${e.precision==='year'?' · 年精度':e.precision==='month'?' · 月精度':''}</time><b>${safe(types[e.type]||e.type)}</b><small>${e.origin==='csm'?'Cyber Scam Monitor':'新闻'} · ${e.state_eligible?'纳入时间状态':'保留证据／不推导状态'} · ${e.certainty==='asserted'?'陈述':'转述或不确定'}</small><p>${safe(e.text)}</p>${link(e.source_url,'查看来源')}</article>`).join('')||'<p>截至该年暂无事件证据。</p>';
+ el('site-detail').innerHTML=`<div class="detail-head"><span class="detail-kicker">${safe(s.site_id)} · ${safe(s.country)}</span><h2>${safe(s.name)}</h2><p class="detail-meta">${safe(s.location)}</p><span class="detail-state" style="background:${M.meta[state][2]}">${safe(M.meta[state][0])} · ${y()}</span><div class="detail-numbers"><b>${stats.reports}<small>去重报道</small></b><b>${stats.sources}<small>媒体来源</small></b><b>${stats.languages.length}<small>报道语言</small></b></div></div>
+ <details open><summary>事件时间线 · ${events.length}</summary>${eventHtml}</details>
+ <details><summary>报道与语言 · ${reports.length}</summary>${reports.map(a=>`<article class="detail-event"><time>${safe(a.published_date)}</time><b>${safe(a.source)} · ${safe(langs[a.language]||a.language)}</b>${link(a.url,a.title)}</article>`).join('')||'<p>当前年份范围暂无报道。</p>'}</details>
+ <details><summary>描述线索 · ${ds.length}</summary><p class="detail-note">直接关联与上下文候选均可在此查看；候选是否进入图表由上方开关控制。</p>${ds.map(d=>`<article class="detail-event"><b>${d.dimensions.map(k=>dims[k]||k).join(' / ')} · ${d.accepted?'直接关联':'上下文候选'}</b><small>${safe(d.source)} · ${safe(d.published_date)} · ${safe(d.polarity)}</small><p>${safe(d.text)}</p><p class="detail-note">命中：${safe(d.terms)} ${safe(d.quantity_expressions)}</p></article>`).join('')||'<p>暂无描述线索。</p>'}</details>
+ <details><summary>赌场参考 · ${s.casinos.length} 个候选</summary><p class="detail-note">当前资料快照；不代表当年牌照有效。</p>${s.casinos.map(c=>`<article class="detail-event"><b>${safe(c.name)}</b><p>距离 ${num(c.distance_m)} 米 · ${safe({high:'高',medium:'中',low:'仅邻近'}[c.confidence])}置信度</p><small>清单参考日期 ${safe(c.reference_date||'未知')} · 状态 ${safe(c.status||'未提供')}</small></article>`).join('')||'<p>未找到候选匹配。</p>'}</details>
+ <details><summary>图片覆盖 · ${s.images.count}</summary><p>独立图片 ${s.images.unique} 张；安保文字线索 ${s.images.security_clues} 张；带 EXIF 时间字段 ${s.images.dated_exif} 张。</p>${Object.entries(s.images.functions).map(([k,v])=>`<p class="detail-note">${safe(k)}：${v}</p>`).join('')}<p class="detail-note">功能词来自 OCR 或图片说明；EXIF 日期尚未区分拍摄和修改时间。历史改造尚待核实。</p></details>`;
 }
-
-function isTrue(value) { return String(value).toLowerCase() === 'true'; }
-
-function escapeHtml(value) {
-  return String(value || '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
-}
-
-function datedAffirmedEvents(siteId) {
-  return (app.eventsBySite.get(siteId) || []).filter(event =>
-    event.polarity === 'affirmed' && isTrue(event.included_in_affirmed_summary) && yearOf(event.event_date_start)
-  );
-}
-
-function stateFor(site, year) {
-  const events = datedAffirmedEvents(site.site_id);
-  const throughYear = events.filter(event => yearOf(event.event_date_start) <= year);
-  const thisYear = events.filter(event => yearOf(event.event_date_start) === year);
-  const hasRelocationNow = thisYear.some(event => event.change_type === 'relocation_or_evacuation');
-  const hasConversionNow = thisYear.some(event => event.change_type === 'use_conversion_or_takeover');
-  const illicitYears = events.filter(event => event.evidence_dimension === 'illicit_activity').map(event => yearOf(event.event_date_start));
-  const firstIllicit = illicitYears.length ? Math.min(...illicitYears) : null;
-  const hasIllicit = firstIllicit !== null && firstIllicit <= year;
-  const precursor = throughYear.some(event => ['previous_formal_use', 'licence_registration_approval'].includes(event.evidence_dimension));
-  const transitionNow = hasIllicit && (hasConversionNow || (firstIllicit === year && precursor));
-  if (hasRelocationNow) return 'relocation';
-  if (transitionNow) return 'transition';
-  if (hasIllicit) return 'illicit';
-  if (precursor || throughYear.some(event => event.evidence_dimension === 'spatial_change')) return 'formal';
-  return 'unknown';
-}
-
-function currentYear() { return Number(el('year-slider').value); }
-
-function visibleSites() {
-  const country = el('country-filter').value;
-  const candidatesOnly = el('candidate-only').checked;
-  return app.sites.filter(site => {
-    const candidate = Number(site.total_selected_evidence_count || 0) > 0;
-    return (!candidatesOnly || candidate) && (country === 'all' || site.country === country);
-  });
-}
-
-function renderMap({fit = false} = {}) {
-  const year = currentYear();
-  const visible = visibleSites();
-  const visibleIds = new Set(visible.map(site => site.site_id));
-  let transitions = 0, relocations = 0;
-  app.sites.forEach(site => {
-    const marker = app.markers.get(site.site_id);
-    if (!marker) return;
-    marker.hidden = !visibleIds.has(site.site_id);
-    if (marker.hidden) return;
-    const state = stateFor(site, year);
-    if (state === 'transition') transitions += 1;
-    if (state === 'relocation') relocations += 1;
-    marker.className = `site-marker ${state}`;
-    marker.textContent = stateMeta[state].glyph;
-    marker.setAttribute('aria-label', `${site.canonical_name}：${stateMeta[state].label}，${year}年`);
-  });
-  el('visible-count').textContent = visible.length;
-  el('transition-count').textContent = transitions;
-  el('relocation-count').textContent = relocations;
-  el('year-output').textContent = year;
-  if (app.selectedId) renderDetail(app.selectedId);
-  if (fit) app.map.fit(visible);
-  else app.map.render();
-}
-
-function dimensionLabel(event) {
-  return ({
-    previous_formal_use: '过去用途',
-    licence_registration_approval: '牌照／注册／批准',
-    spatial_change: '空间或运营变化',
-    illicit_activity: '非法活动报告'
-  })[event.evidence_dimension] || event.event_type || '事件';
-}
-
-function renderDetail(siteId) {
-  const site = app.sites.find(item => item.site_id === siteId);
-  if (!site) return;
-  const year = currentYear();
-  const state = stateFor(site, year);
-  const events = (app.eventsBySite.get(siteId) || []).filter(event => {
-    const eventYear = yearOf(event.event_date_start);
-    return !eventYear || eventYear <= year;
-  }).sort((a, b) => (yearOf(a.event_date_start) || 9999) - (yearOf(b.event_date_start) || 9999) || Number(a.sentence_index || 0) - Number(b.sentence_index || 0));
-  const eventHtml = events.length ? events.map(event => {
-    const date = event.event_date_start || '时间不明';
-    const flags = [event.polarity !== 'affirmed' ? '否定／未确认' : '', event.certainty !== 'asserted' ? '转述／不确定' : ''].filter(Boolean).join(' · ');
-    return `<article class="detail-event"><time>${escapeHtml(date)}</time><b>${escapeHtml(dimensionLabel(event))}${flags ? ` · ${escapeHtml(flags)}` : ''}</b><p>${escapeHtml(event.evidence_text)}</p>${event.profile_url ? `<a href="${escapeHtml(event.profile_url)}" target="_blank" rel="noreferrer">查看来源 ↗</a>` : ''}</article>`;
-  }).join('') : '<p class="detail-note">截至该年没有可显示的证据。</p>';
-  el('site-detail').innerHTML = `<div class="detail-head"><span class="detail-kicker">${escapeHtml(site.site_id)} · ${escapeHtml(site.country)}</span><h2>${escapeHtml(site.canonical_name)}</h2><p class="detail-meta">${escapeHtml(site.location_text || site.province)}</p><span class="detail-state ${state}">${escapeHtml(stateMeta[state].label)} · ${year}</span><p class="detail-note">证据链：${escapeHtml(site.evidence_chain_level || '未分类')} · 肯定证据 ${escapeHtml(site.affirmed_evidence_count || '0')} 条</p></div><div class="detail-events"><h3>截至 ${year} 年的证据</h3>${eventHtml}</div>`;
-}
-
-function installSites() {
-  app.map.markerPane.replaceChildren();
-  app.markers.clear();
-  app.sites.forEach(site => {
-    const lat = Number(site.latitude), lon = Number(site.longitude);
-    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
-    const marker = document.createElement('button');
-    marker.type = 'button';
-    marker.className = 'site-marker unknown';
-    marker.textContent = '·';
-    marker.addEventListener('click', () => { app.selectedId = site.site_id; renderDetail(site.site_id); });
-    app.map.markerPane.append(marker);
-    app.markers.set(site.site_id, marker);
-  });
-}
-
-function configureControls() {
-  const years = [...app.eventsBySite.values()].flat().map(event => yearOf(event.event_date_start)).filter(Boolean);
-  app.minYear = years.length ? Math.min(...years) : 2015;
-  app.maxYear = years.length ? Math.max(...years) : 2026;
-  el('year-slider').min = app.minYear;
-  el('year-slider').max = app.maxYear;
-  el('year-slider').value = app.maxYear;
-  el('year-min').textContent = app.minYear;
-  el('year-max').textContent = app.maxYear;
-  const countries = [...new Set(app.sites.map(site => site.country).filter(Boolean))].sort();
-  el('country-filter').innerHTML = '<option value="all">全部</option>' + countries.map(country => `<option value="${escapeHtml(country)}">${escapeHtml(country)}</option>`).join('');
-  ['year-slider', 'play-button', 'candidate-only', 'country-filter'].forEach(id => { el(id).disabled = false; });
-}
-
-async function loadFiles(files) {
-  const parsed = await Promise.all([...files].map(async file => ({name: file.name, rows: parseCsv(await file.text())})));
-  const summary = parsed.find(item => item.rows[0] && 'evidence_chain_level' in item.rows[0] && 'latitude' in item.rows[0]);
-  const evidence = parsed.find(item => item.rows[0] && 'evidence_dimension' in item.rows[0] && 'evidence_text' in item.rows[0]);
-  if (!summary || !evidence) throw new Error('未识别出地点汇总表和逐句证据表，请同时选择这两个文件。');
-  app.sites = summary.rows;
-  app.eventsBySite = new Map();
-  evidence.rows.forEach(event => {
-    if (!app.eventsBySite.has(event.site_id)) app.eventsBySite.set(event.site_id, []);
-    app.eventsBySite.get(event.site_id).push(event);
-  });
-  installSites();
-  configureControls();
-  renderMap({fit: true});
-  const candidateCount = app.sites.filter(site => Number(site.total_selected_evidence_count || 0) > 0).length;
-  el('load-status').classList.remove('error');
-  el('load-status').textContent = `已在本地载入 ${app.sites.length} 个地点、${evidence.rows.length} 条证据；其中 ${candidateCount} 个地点存在相关证据。`;
-}
-
-function stopPlayback() {
-  if (app.playTimer) window.clearInterval(app.playTimer);
-  app.playTimer = null;
-  el('play-button').textContent = '播放';
-  el('play-button').setAttribute('aria-pressed', 'false');
-}
-
-el('data-files').addEventListener('change', event => {
-  stopPlayback();
-  loadFiles(event.target.files).catch(error => {
-    el('load-status').textContent = error.message;
-    el('load-status').classList.add('error');
-  });
-});
-el('year-slider').addEventListener('input', () => renderMap());
-el('candidate-only').addEventListener('change', () => renderMap({fit: true}));
-el('country-filter').addEventListener('change', () => renderMap({fit: true}));
-el('play-button').addEventListener('click', () => {
-  if (app.playTimer) { stopPlayback(); return; }
-  if (currentYear() >= app.maxYear) el('year-slider').value = app.minYear;
-  el('play-button').textContent = '暂停';
-  el('play-button').setAttribute('aria-pressed', 'true');
-  renderMap();
-  app.playTimer = window.setInterval(() => {
-    const next = currentYear() + 1;
-    if (next > app.maxYear) { stopPlayback(); return; }
-    el('year-slider').value = next;
-    renderMap();
-  }, 1100);
-});
-
-app.map = new LocalPointMap(el('map'));
+function reportsForSite(s){return reports(s);}
+function stop(){clearInterval(app.timer);app.timer=null;el('play-button').textContent='播放';el('play-button').setAttribute('aria-pressed','false');}
+function setYear(n){el('year-slider').value=Math.max(Number(el('year-slider').min),Math.min(Number(el('year-slider').max),n));render();}
+function controls(enabled){document.querySelectorAll('.timeline-panel input,.timeline-panel button,.timeline-panel select,.explorer-controls input,.explorer-controls select,.checkbox-controls input,.checkbox-controls button,#clear-data,#export-summary').forEach(e=>e.disabled=!enabled);}
+function reset(){for(const id of ['country-filter','source-filter','language-filter','origin-filter'])el(id).value='all';el('search').value='';el('candidate-only').checked=false;el('context-links').checked=false;el('attributed').checked=true;el('time-mode').value='cumulative';el('layer').value='state';}
+el('data-file').onchange=async e=>{stop();const f=e.target.files[0];if(!f)return;try{if(f.size>80*1024*1024)throw Error('文件超过 80 MB，请选择专用 research-map.json。');const data=M.validate(JSON.parse(await f.text()));app.data=data;app.selected=null;reset();overview(data.summary);const [min,max]=data.summary.year_range;el('year-slider').min=min;el('year-slider').max=max;el('year-slider').value=max;el('year-min').textContent=min;el('year-max').textContent=max;
+ for(const [id,values] of [['country-filter',data.sites.map(s=>s.country)],['source-filter',data.sites.flatMap(s=>s.articles.map(a=>a.source))]])el(id).innerHTML='<option value="all">全部</option>'+[...new Set(values)].sort().map(v=>`<option value="${safe(v)}">${safe(v)}</option>`).join('');
+ controls(true);el('map-placeholder').hidden=true;render();map.fit();el('load-status').textContent=`已载入 ${data.sites.length} 个地点 · 数据版本 ${data.release_id}`;el('load-status').classList.remove('error');}catch(error){el('load-status').textContent=error.message;el('load-status').classList.add('error');}finally{e.target.value='';}};
+el('clear-data').onclick=()=>{stop();app.data=null;app.selected=null;app.rows=[];app.visible=[];map.setPoints([]);controls(false);el('map-placeholder').hidden=false;el('load-status').textContent='本地数据已从当前页面清除。';el('year-output').textContent='—';for(const id of ['visible-count','transition-count','relocation-count'])el(id).textContent='0';el('report-count').textContent='0 / 0';el('site-table').innerHTML='<tr><td colspan="8">等待载入研究包。</td></tr>';for(const id of ['attention-chart','description-chart','event-chart'])bars(id,[]);renderDetail();};
+el('year-slider').oninput=()=>{stop();render();};el('previous-year').onclick=()=>{stop();setYear(y()-1);};el('next-year').onclick=()=>{stop();setYear(y()+1);};
+el('play-button').onclick=()=>{if(app.timer){stop();return;}if(y()>=Number(el('year-slider').max))setYear(Number(el('year-slider').min));el('play-button').textContent='暂停';el('play-button').setAttribute('aria-pressed','true');app.timer=setInterval(()=>{if(y()>=Number(el('year-slider').max)){stop();return;}setYear(y()+1);},1000);};
+for(const id of ['country-filter','layer','source-filter','language-filter','origin-filter','candidate-only','attributed','context-links','time-mode'])el(id).onchange=()=>{render();if(id==='country-filter')map.fit();};
+el('search').oninput=()=>render();el('reset-filters').onclick=()=>{stop();reset();render();map.fit();};
+document.addEventListener('click',e=>{const button=e.target.closest('[data-site]');if(button)select(button.dataset.site,true);});
+el('export-summary').onclick=()=>{const columns=['site_id','name','year','state','reports','sources','languages','casino_candidates','image_count'];const rows=app.rows.map(r=>[r.s.site_id,r.s.name,y(),M.meta[r.state][0],r.stats.reports,r.stats.sources,r.stats.languages.join('|'),r.s.casino_name_candidates,r.s.image_count]);const quote=v=>'"'+String(v).replace(/^[=+@-]/,"'$&").replace(/"/g,'""')+'"';const csv='\uFEFF'+[columns,...rows].map(r=>r.map(quote).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=`site-summary-${y()}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+fetch('research-summary.json').then(r=>{if(!r.ok)throw Error('研究总览读取失败');return r.json();}).then(s=>{if(!app.data){overview(s);el('load-status').textContent='已显示总体统计。选择研究包后开启地点地图。';}}).catch(e=>{el('load-status').textContent=e.message+'；仍可载入本地研究包。';});

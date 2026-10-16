@@ -1,90 +1,28 @@
 <!doctype html>
 <html lang="zh-CN" class="access-locked">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="东南亚电诈地点年度状态与空间变化交互地图">
-  <title>年度空间变化地图｜东南亚电诈研究</title>
-  <link rel="stylesheet" href="change-map.css">
-  <link rel="stylesheet" href="access.css">
-  <script src="access.js"></script>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="东南亚电诈园区研究：年度变化、新闻关注、描述线索、赌场参考与图像证据">
+  <title>空间证据研究室｜东南亚电诈研究</title>
+  <link rel="stylesheet" href="change-map.css"><link rel="stylesheet" href="access.css"><script src="access.js"></script>
 </head>
 <body>
-  <header class="map-topbar">
-    <a class="map-brand" href="index.html" aria-label="返回研究看板">
-      <span class="map-brand-mark">CS</span>
-      <span>空间变化地图</span>
-    </a>
-    <span class="local-mode"><i></i>LOCAL DATA MODE</span>
-  </header>
-
+  <header class="map-topbar"><a class="map-brand" href="index.html"><span class="map-brand-mark">CS</span>研究看板 / 空间证据研究室</a><span class="local-mode">● 本地研究数据</span></header>
   <main>
-    <section class="map-intro">
-      <div>
-        <p class="eyebrow">SPATIAL TRANSITION EXPLORER</p>
-        <h1>地点状态如何随年份变化？</h1>
-        <p>使用本地研究数据生成地图。地点级数据只在当前浏览器标签页内解析，不会上传或写入 GitHub。</p>
-      </div>
-      <label class="file-control" for="data-files">
-        <span>载入分析数据</span>
-        <small>同时选择 site_change_summary.csv 与 site_change_evidence.csv</small>
-        <input id="data-files" type="file" accept=".csv,text/csv" multiple>
-      </label>
-    </section>
-
-    <section class="timeline-panel" aria-label="地图时间控制">
-      <div class="timeline-head">
-        <div>
-          <span class="control-label">观察年份</span>
-          <strong id="year-output">等待数据</strong>
-        </div>
-        <div class="timeline-actions">
-          <button id="play-button" type="button" disabled aria-pressed="false">播放</button>
-          <label><input id="candidate-only" type="checkbox" checked disabled> 仅显示有证据地点</label>
-          <label>国家
-            <select id="country-filter" disabled>
-              <option value="all">全部</option>
-            </select>
-          </label>
-        </div>
-      </div>
-      <input id="year-slider" type="range" min="2015" max="2026" value="2026" step="1" disabled aria-label="观察年份">
-      <div class="timeline-scale"><span id="year-min">—</span><span id="year-max">—</span></div>
-    </section>
-
-    <section class="map-stats" aria-live="polite">
-      <div><span>当前可见</span><strong id="visible-count">0</strong></div>
-      <div><span>本年转化</span><strong id="transition-count">0</strong></div>
-      <div><span>本年搬迁</span><strong id="relocation-count">0</strong></div>
-      <p id="load-status">请选择两张 CSV。候选地点表不是必需文件。</p>
-    </section>
-
-    <section class="map-workspace">
-      <div id="map" role="application" aria-label="地点年度状态交互地图"></div>
-      <aside class="site-detail" id="site-detail" aria-live="polite">
-        <div class="detail-empty">
-          <span>SELECT A SITE</span>
-          <h2>点击地图点位查看变化链</h2>
-          <p>有明确日期的证据按年排列；时间不明的证据单独列出，不参与状态先后推断。</p>
-        </div>
-      </aside>
-    </section>
-
-    <section class="legend" aria-label="地图图例">
-      <div><i class="legend-dot unknown">·</i><span>未观察到有日期证据</span></div>
-      <div><i class="legend-dot formal">正</i><span>正规身份／前置状态</span></div>
-      <div><i class="legend-dot transition">变</i><span>本年转化或接管</span></div>
-      <div><i class="legend-dot relocation">移</i><span>本年搬迁或撤离</span></div>
-      <div><i class="legend-dot illicit">诈</i><span>已有非法活动报告</span></div>
-    </section>
-
-    <section class="method-note">
-      <b>判读规则</b>
-      <p>颜色仅由肯定且带明确日期的证据推导。“本年”按日期精度可能代表同一年或同一月，并不自动等同于同一天。灰色不是“没有活动”，而是当前年份之前没有可排序证据。</p>
-      <p>底图瓦片由 OpenStreetMap 提供，瓦片服务会收到常规地图视窗请求；所选 CSV 与地点明细不会被页面上传。</p>
-    </section>
-  </main>
-
-  <script src="change-map.js"></script>
-</body>
-</html>
+    <section class="map-intro"><div><p class="eyebrow">SPACE · TIME · EVIDENCE</p><h1>在时间里，<br>读懂园区的变化。</h1><p>以地点为入口，连接空间用途、新闻关注、生活条件与图像线索。拖动年份，观察证据何时出现。</p></div>
+      <div class="file-control"><label for="data-file">载入统一研究包</label><small>选择本地 research-map.json，即可打开全部地点与证据。数据仅保存在此标签页内存。</small><input id="data-file" type="file" accept=".json,application/json"><button id="clear-data" type="button" disabled>清除已载入数据</button><p id="load-status" role="status">正在读取研究总览…</p></div></section>
+    <section id="overview" class="overview-grid" aria-label="研究数据总览"></section>
+    <section class="analysis-panels" id="global-charts" aria-label="全样本统计"><article class="chart-panel"><h2>报道的时间分布</h2><p>文章发表年份 · 全部相关报道</p><div id="global-years" class="bars"></div></article><article class="chart-panel"><h2>描述词的检索覆盖</h2><p>四类可重叠 · 包含无法定位的句子</p><div id="global-dimensions" class="bars"></div></article><article class="chart-panel"><h2>地点关联质量</h2><p>直接关联、上下文候选与无法匹配</p><div id="global-matches" class="bars"></div><p id="coverage-note"></p></article></section>
+    <section class="timeline-panel" aria-label="年份控制"><div class="timeline-head"><div><span class="control-label">观察年份</span><strong id="year-output">—</strong></div><div class="timeline-actions"><button id="previous-year" disabled aria-label="上一年">←</button><button id="play-button" disabled aria-pressed="false">播放</button><button id="next-year" disabled aria-label="下一年">→</button><label>报道统计<select id="time-mode" disabled><option value="cumulative">截至本年</option><option value="year">仅本年</option></select></label></div></div><input id="year-slider" type="range" min="2000" max="2026" disabled aria-label="观察年份"><div class="timeline-scale"><span id="year-min">—</span><span>事件按发生时间 · 报道按发表时间</span><span id="year-max">—</span></div></section>
+    <section class="explorer-controls" aria-label="筛选地点"><label class="search-control">搜索地点<input id="search" type="search" placeholder="名称、别名、行政区…" disabled></label><label>国家<select id="country-filter" disabled><option value="all">全部</option></select></label><label>地图图层<select id="layer" disabled><option value="state">年度事件状态</option><option value="attention">新闻关注度</option><option value="brutality">残忍描述词</option><option value="harm">危害描述词</option><option value="scale">规模描述词</option><option value="living_conditions">生活条件词</option><option value="casino">官方赌场参考</option><option value="images">图片功能线索</option></select></label><label>媒体<select id="source-filter" disabled><option value="all">全部</option></select></label><label>报道语言<select id="language-filter" disabled><option value="all">全部</option><option value="zh">中文</option><option value="en">英文</option><option value="km">高棉文</option></select></label><label>证据来源<select id="origin-filter" disabled><option value="all">全部事件来源</option><option value="csm">Cyber Scam Monitor</option><option value="news">新闻事件</option></select></label></section>
+    <div class="checkbox-controls"><label><input id="candidate-only" type="checkbox" disabled>仅有变化／新闻证据</label><label><input id="attributed" type="checkbox" checked disabled>包括转述／不确定报告</label><label><input id="context-links" type="checkbox" disabled>描述词包括上下文候选</label><button id="reset-filters" disabled>重置筛选</button></div>
+    <section class="map-stats" aria-live="polite"><div><span>筛选地点</span><strong id="visible-count">0</strong></div><div><span>本年时间链</span><strong id="transition-count">0</strong></div><div><span>本年搬迁报告</span><strong id="relocation-count">0</strong></div><div><span>去重报道 / 媒体</span><strong id="report-count">0 / 0</strong></div></section>
+    <p id="layer-note" class="layer-note">载入研究包后，可在地图中切换证据图层。</p>
+    <section class="map-workspace"><div id="map" role="region" aria-label="交互园区地图"><div id="map-placeholder"><span>LOCAL RESEARCH WORKSPACE</span><h2>339 个地点，一份研究包。</h2><p>在上方载入 research-map.json。<br>支持缩放、拖动和点击；下方列表也可定位。</p></div></div><aside class="site-detail" id="site-detail" aria-live="polite"><div class="detail-empty"><span>SELECT A SITE</span><h2>选择园区，查看证据。</h2><p>事件时间线、报道来源、描述关键词、赌场参考与图片覆盖会在这里展开。</p></div></aside></section>
+    <section id="legend" class="legend" aria-label="地图图例"></section>
+    <section class="analysis-panels local-analysis"><article class="chart-panel"><h2>筛选地点的媒体关注度</h2><p>前 10 个 · 去重文章数；点击定位</p><div id="attention-chart" class="bars"><p>等待载入研究包</p></div></article><article class="chart-panel"><h2>筛选地点的描述线索</h2><p>使用当前年份与关联范围</p><div id="description-chart" class="bars"></div></article><article class="chart-panel"><h2>年份变化概览</h2><p>肯定、明确日期、直接关联的事件</p><div id="event-chart" class="bars"></div></article></section>
+    <section class="site-table-panel"><div class="table-heading"><h2>地点比较</h2><button id="export-summary" disabled>导出当前汇总 CSV</button></div><div class="table-scroll"><table><thead><tr><th>地点 / 国家</th><th>年度状态</th><th>去重报道</th><th>媒体数</th><th>语言</th><th>描述维度命中</th><th>赌场候选</th><th>图片</th></tr></thead><tbody id="site-table"><tr><td colspan="8">载入研究包后显示地点列表。</td></tr></tbody></table></div></section>
+    <details class="method-note"><summary>如何解释这些图层与年份？</summary><p>“前置→涉诈时间链”要求用途或牌照背景的日期区间严格早于首次涉诈报告。本年只表示证据的日期精度，不等于确证违法开始的时点；区间重叠不会自动判为先后变化。一般建设、停业和搬迁独立显示。曾有报告的地点不代表今天仍在运营。</p><p>报道统计使用发表时间，并按相同网址／相同正文去重。“媒体数”指不同来源名称，转载与同一新闻集团尚未全部识别。描述词计数反映检索线索，不能作为残忍或危害程度分数。上下文候选默认关闭，无法匹配的材料保留在研究包的明细数据库。</p><p>赌场参考与图片层是当前资料快照，不随年份推断历史状态。赌场清单匹配不等于有效牌照；仅距离接近的候选单独标识。OCR、图片说明和 EXIF 不能独立确认旧用途或封闭化改造。</p><p>本页代码与总体统计通过 GitHub 发布。详细研究包在浏览器内读取；底图只向 OpenStreetMap 请求地图瓦片。</p></details>
+  </main><footer class="map-footer"><a href="index.html">← 返回研究看板</a><span id="release-label">RESEARCH DATA / V2</span></footer>
+  <script src="research-model.js"></script><script src="research-map-canvas.js"></script><script src="change-map.js"></script>
+</body></html>
