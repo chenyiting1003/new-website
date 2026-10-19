@@ -1,29 +1,29 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-16 10:11 CST",
-  "downloaded_files": 364,
-  "downloaded_bytes": 1798686170,
+  "generated_at": "2026-10-19 13:12 CST",
+  "downloaded_files": 2006,
+  "downloaded_bytes": 96766043144,
   "sources": [
     {
       "priority": "01",
       "title": "NASA VNP46A3 V2 月度夜光",
-      "state": "blocked",
-      "status": "目录完成 · 原件待授权",
-      "result": "已检索六国空间包络内 1,584 个候选瓦片；首个 HDF5 请求返回 401。",
-      "coverage": "约 500 米；2012 年起月度；当前清单至 2026-10",
-      "processed": "保存集合元数据、AOI、文件 URL、日期与大小；尚未把包络误当国家掩膜。",
-      "next": "提供 Earthdata／LAADS 下载令牌后批量获取，再按国家边界裁切和质量波段筛选。",
+      "state": "done",
+      "status": "1,584 / 1,584 原始瓦片；3,168 个国别图层",
+      "result": "176 个月 × 6 个国家范围 × 3 个图层已完成；马来西亚仅保留半岛，临时网络失败已自动恢复。",
+      "coverage": "约 500 米；2012-01—2026-08 月度；六国，马来西亚半岛",
+      "processed": "原始 HDF5 全部保留；输出辐亮度、有效观测次数和质量标记 GeoTIFF，并记录边界版本、哈希与清单。",
+      "next": "进入园区缓冲区和统一网格聚合；按质量标记和有效观测数筛选，夜光不能直接等同 GDP。",
       "url": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A3"
     },
     {
       "priority": "02",
       "title": "WorldPop Global2 100 米人口",
-      "state": "active",
-      "status": "45 / 96 国别年度栅格已校验",
-      "result": "KHM 16/16；LAO 13/16；MMR 13/16；THA 3/16",
+      "state": "done",
+      "status": "96 / 96 国别年度栅格已校验",
+      "result": "KHM 16/16；LAO 16/16；MMR 16/16；MYS 16/16；THA 16/16；VNM 16/16",
       "coverage": "六国 2015—2030；2025 年后含预测；马来西亚原件为全国",
       "processed": "逐文件 SHA-256、CRS、范围、像元数、NoData 与数据类型审计。",
-      "next": "补齐后裁切马来西亚半岛；按模型估计／预测分层，不能写成实测人口。",
+      "next": "分析层只裁切马来西亚半岛，并将模型估计期／预测期分层；不能写成实测人口。",
       "url": "https://hub.worldpop.org/geodata/listing?id=135"
     },
     {
