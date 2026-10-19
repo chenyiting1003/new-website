@@ -89,6 +89,7 @@ h1 em { color: var(--red); font-style: normal; }
 .task-status { align-self:start; justify-self:end; padding:7px 10px; font:800 10px/1 monospace; letter-spacing:.08em; border:1px solid currentColor; }
 .task[data-state="done"] .task-status { color:var(--teal); }
 .task[data-state="active"] .task-status { color:var(--red); }
+.task[data-state="paused"] .task-status { color:#6e5c8f; background:#eee9f7; }
 .task[data-state="blocked"] .task-status { color:#9a6510; background:#f6e1b4; }
 .task[data-state="planned"] .task-status { color:#777; }
 .audit-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
