@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-19 13:12 CST",
+  "generated_at": "2026-10-19 21:48 CST",
   "downloaded_files": 2006,
   "downloaded_bytes": 96766043144,
   "sources": [
@@ -25,6 +25,17 @@
       "processed": "逐文件 SHA-256、CRS、范围、像元数、NoData 与数据类型审计。",
       "next": "分析层只裁切马来西亚半岛，并将模型估计期／预测期分层；不能写成实测人口。",
       "url": "https://hub.worldpop.org/geodata/listing?id=135"
+    },
+    {
+      "priority": "遥感",
+      "title": "Sentinel-2 L3 季度无云合成",
+      "state": "active",
+      "status": "柬埔寨＋缅甸预检完成；等待 CDSE S3 密钥",
+      "result": "官方目录确认 40 个实际存在季度、5,852 个相交原生 MGRS 产品和 29,260 个波段下载任务；339 个园区全部仍在范围内。",
+      "coverage": "10 米；2015 Q3—2026 Q2；2015 Q3/Q4 为部分覆盖，2016 全年缺失，2017 Q1 起完整",
+      "processed": "两国精确边界与 5 公里下载缓冲、季度目录、产品清单和容量估算已建立；六国边界仅作来源留档，不进入下载清单。",
+      "next": "凭据到位后先做两国最早／中期／最新季度样本测试；通过压缩率、波段、掩膜和 COG 校验后再开始约 4.09 TB 的全量下载。",
+      "url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-global-mosaics"
     },
     {
       "priority": "03",
