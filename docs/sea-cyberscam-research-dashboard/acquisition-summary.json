@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-19 22:42 CST",
+  "generated_at": "2026-10-21 00:53 CST",
   "downloaded_files": 2006,
   "downloaded_bytes": 96766043144,
   "sources": [
@@ -29,12 +29,12 @@
     {
       "priority": "遥感",
       "title": "Sentinel-2 L3 季度无云合成",
-      "state": "active",
-      "status": "仅柬埔寨全量下载进行中",
-      "result": "CDSE S3 凭据已验证；9/9 个代表样本通过 COG、波段、分辨率与压缩测试。全量队列共 1,263 个产品，当前无失败任务。",
+      "state": "done",
+      "status": "1,263 / 1,263 柬埔寨原生产品已下载并合成为 COG",
+      "result": "40 个实际季度完成；0 个失败任务；本地多波段档案约 944.31 GB。",
       "coverage": "柬埔寨全境及 5 公里缓冲；10 米；2015 Q3—2026 Q2；2015 Q3/Q4 部分覆盖，2016 全年缺失，2017 Q1 起完整",
-      "processed": "柬埔寨精确边界与 5 公里下载缓冲、季度目录、产品清单和容量估算已建立；缅甸及其他四国不进入下载清单。",
-      "next": "8 路断点续传服务正在运行；样本实测后预计最终档案约 941.89 GB。下载完成后执行完整性验证、园区本地裁切和季度指标。",
+      "processed": "B02、B03、B04、B08 与 observations 已合成为多波段 COG；内部有效像元掩膜、SHA-256、源产品和季度 metadata 均保留。",
+      "next": "生成国家季度完整性清单、VRT，并只从本地档案裁切 291 个柬埔寨园区，计算季度质量和变化候选。",
       "url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-global-mosaics"
     },
     {
