@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-21 00:53 CST",
+  "generated_at": "2026-10-21 14:39 CST",
   "downloaded_files": 2006,
   "downloaded_bytes": 96766043144,
   "sources": [
@@ -36,6 +36,17 @@
       "processed": "B02、B03、B04、B08 与 observations 已合成为多波段 COG；内部有效像元掩膜、SHA-256、源产品和季度 metadata 均保留。",
       "next": "生成国家季度完整性清单、VRT，并只从本地档案裁切 291 个柬埔寨园区，计算季度质量和变化候选。",
       "url": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-global-mosaics"
+    },
+    {
+      "priority": "遥感",
+      "title": "Open Buildings Temporal V1 年度建筑推断",
+      "state": "done",
+      "status": "2,328 / 2,328 园区年度影像已校验",
+      "result": "291 个柬埔寨园区 × 2016—2023 年全部完成，三波段 GeoTIFF 共 1.97 GiB；48 个缅甸园区不在产品覆盖范围，保留 384 条无覆盖记录；失败 0。",
+      "coverage": "园区坐标周边 1 公里；4 米有效分辨率；年度；building presence、fractional count、height",
+      "processed": "仅从公开云存储读取所需窗口；建筑数量波段按 8×8 源像元求和，高度与存在置信度按 4 米网格取样；逐文件 SHA-256、投影、波段、尺寸与年份均已审计。",
+      "next": "提取跨年建筑变化候选，并与季度 Sentinel-2、街景和文本事件交叉核验；模型栅格不直接当作精确建筑轮廓。",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_Research_open-buildings-temporal_v1"
     },
     {
       "priority": "03",
