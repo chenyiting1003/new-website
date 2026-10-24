@@ -1,4 +1,4 @@
-const statusLabel = {done:'已完成', active:'进行中', blocked:'受阻', planned:'待开始'};
+const statusLabel = {done:'已完成', active:'进行中', paused:'已暂缓', blocked:'受阻', planned:'待开始'};
 
 async function loadProgress() {
   const response = await fetch('progress.json', {cache:'no-store'});
@@ -10,7 +10,7 @@ function render(data) {
   document.querySelector('#snapshot-date').textContent = `更新 ${data.updated_at}`;
   document.querySelector('#current-focus').textContent = data.current_focus;
   const done = data.tasks.filter(t => t.state === 'done').length;
-  const weighted = data.tasks.reduce((sum,t) => sum + ({done:1,active:.5,blocked:.15,planned:0}[t.state] || 0), 0);
+  const weighted = data.tasks.reduce((sum,t) => sum + ({done:1,active:.5,paused:0,blocked:.15,planned:0}[t.state] || 0), 0);
   const percent = Math.round(weighted / data.tasks.length * 100);
   const ring = document.querySelector('#progress-ring');
   ring.style.setProperty('--progress', `${percent}%`);
