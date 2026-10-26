@@ -34,6 +34,10 @@ function render(data) {
     </article>
   `).join('');
 
+  document.querySelector('#conclusion-grid').innerHTML = data.conclusions.map(c => `
+    <article class="audit-card pass"><div class="audit-icon">↗</div><h3>${c.title}</h3><p>${c.detail}</p></article>
+  `).join('');
+
   document.querySelector('#audit-grid').innerHTML = data.audit.map(a => `
     <article class="audit-card ${a.level}"><div class="audit-icon">${a.level === 'pass' ? '✓' : '!'}</div><h3>${a.title}</h3><p>${a.detail}</p></article>
   `).join('');
