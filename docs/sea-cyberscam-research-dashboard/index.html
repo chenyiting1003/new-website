@@ -1,11 +1,13 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="access-locked">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="东南亚电诈空间变化研究计划、数据采集状态和质量审计看板">
   <title>东南亚电诈空间变化｜研究看板</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="access.css">
+  <script src="access.js"></script>
 </head>
 <body>
   <div class="page-grid" aria-hidden="true"></div>
@@ -31,6 +33,8 @@
           <div class="hero-actions">
             <a class="button primary" href="#plan">查看研究计划</a>
             <a class="button ghost" href="#data">数据状态</a>
+            <a class="button ghost" href="#method">识别方法</a>
+            <a class="button ghost" href="change-map.html">打开变化地图</a>
           </div>
         </div>
         <div class="progress-module" aria-label="总体研究进度">
@@ -63,6 +67,16 @@
         </div>
         <div class="country-bars" id="country-bars"></div>
       </div>
+      <div class="acquisition-header"><div class="panel-kicker">POPULATION · ECONOMY · URBAN ACTIVITY</div><h3>六国人口与经济数据采集</h3><p>柬埔寨、缅甸优先；老挝、泰国、越南和马来西亚半岛用于跨境比较。下载文件不等于可分析面板。</p></div>
+      <div class="dataset-layers">
+        <article><b>A · 区域社会经济面板</b><p>行政单元 × 年份。保留官方原尺度、统计口径和边界版本，不下推到 100 米。</p></article>
+        <article><b>B · 网格城市活动面板</b><p>500 米／1 公里 × 月份。人口是年度模型值，夜光是月度代理指标，不伪造月度人口。</p></article>
+        <article><b>C · 园区事件数据库</b><p>园区 × 事件时间。区分文章日期、事件日期和时间精度，再连接区域与网格。</p></article>
+      </div>
+      <ol class="acquisition-workflow"><li>核实来源与许可</li><li>下载原件与校验哈希</li><li>检查字段、缺失与年份</li><li>对齐行政编码／空间范围</li><li>质量筛选与空间连接</li><li>评估面板与研究设计</li></ol>
+      <p id="acquisition-snapshot" class="acquisition-note">正在读取采集快照…</p>
+      <div id="acquisition-grid" class="acquisition-grid"></div>
+      <details class="acquisition-next"><summary>后续数据与研究边界</summary><p>继续补齐柬埔寨人口普查与家庭调查、缅甸 2014 镇区普查及 P-code 历史；随后接入泰国 DOPA／GPP、老挝普查、越南省级统计、马来西亚县级人口与 GDP、GHSL／Dynamic World。均需逐项核验，未标记为已经下载。</p><p>跨国栅格统一前先固定国家掩膜与等面积网格；人口计数使用守恒聚合，夜光保留质量标记、有效观测数与缺测。马来西亚国家原件必须排除东马后才能进入研究层。战争、停电、迁移与边境贸易是混杂因素，不能把夜光变化直接解释为园区的经济影响。</p></details>
     </section>
 
     <section class="section-shell plan" id="plan">
@@ -72,6 +86,7 @@
           <button class="filter active" data-filter="all">全部</button>
           <button class="filter" data-filter="done">已完成</button>
           <button class="filter" data-filter="active">进行中</button>
+          <button class="filter" data-filter="paused">已暂缓</button>
           <button class="filter" data-filter="blocked">受阻</button>
           <button class="filter" data-filter="planned">待开始</button>
         </div>
@@ -79,9 +94,75 @@
       <div class="task-list" id="task-list"></div>
     </section>
 
+    <section class="section-shell audit" id="conclusions">
+      <div class="section-heading">
+        <div><span class="section-no">03</span><h2>阶段性结论</h2></div>
+        <p>区分数据直接支持的结果与仍需进一步检验的机制解释。</p>
+      </div>
+      <div class="audit-grid" id="conclusion-grid"></div>
+    </section>
+
+    <section class="section-shell method" id="method">
+      <div class="section-heading">
+        <div><span class="section-no">04</span><h2>合成对照网格如何计算</h2></div>
+        <p>合成对照不是一个真实地点，而是多个远离已知园区的1公里网格按政策前轨迹加权组成的虚拟反事实。</p>
+      </div>
+
+      <div class="method-stats" aria-label="合成对照当前样本规模">
+        <article><span>全国基础网格</span><strong>180,611</strong><p>柬埔寨境内1 km × 1 km网格</p></article>
+        <article><span>20 km外合格网格</span><strong>153,690</strong><p>远离所有已知园区，降低空间污染</p></article>
+        <article><span>候选／完整供体</span><strong>1,620 / 942</strong><p>942个具有完整政策前12个月数据</p></article>
+        <article><span>最终正权重供体</span><strong>19</strong><p>有效供体数10.8，最大权重15.1%</p></article>
+      </div>
+
+      <div class="method-grid">
+        <article class="method-card">
+          <span class="method-step">STEP 01</span>
+          <h3>构造处理组月度序列</h3>
+          <p>每月先计算各园区0—1公里内质量码0/1的VIIRS夜间灯光，再对291个柬埔寨园区等权平均。使用反双曲正弦转换，避免极亮赌场或城市中心支配总体结果。</p>
+          <div class="formula"><i>Y</i><sub>t</sub><sup>T</sup> = (1 / 291) Σ<sub>i=1</sub><sup>291</sup> asinh(<i>NTL</i><sub>it</sub>)</div>
+        </article>
+
+        <article class="method-card">
+          <span class="method-step">STEP 02</span>
+          <h3>筛选供体网格</h3>
+          <p>候选网格距任何已知园区至少20公里，并依据政策前夜光均值、趋势、波动、WorldPop人口、距边境距离和距合法赌场距离进行筛选。未来结果不参与筛选。</p>
+          <div class="formula"><i>d</i>(grid, any compound) ≥ 20 km</div>
+        </article>
+
+        <article class="method-card wide">
+          <span class="method-step">STEP 03</span>
+          <h3>用政策前12个月拟合非负权重</h3>
+          <p>权重非负且总和为1。模型匹配的是去均值后的月度变化轨迹；单位截距吸收园区与普通网格之间永久存在的亮度水平差异。</p>
+          <div class="constraint"><span><i>w</i><sub>j</sub> ≥ 0</span><span>Σ<sub>j</sub><i>w</i><sub>j</sub> = 1</span></div>
+          <div class="formula multi">min<sub>w</sub> Σ<sub>t&lt;T</sub> [(<i>Y</i><sub>t</sub><sup>T</sup> − <span class="overline">Y</span><sub>pre</sub><sup>T</sup>) − Σ<sub>j</sub><i>w</i><sub>j</sub>(<i>Y</i><sub>jt</sub><sup>C</sup> − <span class="overline">Y</span><sub>j,pre</sub><sup>C</sup>)]² + λΣ<sub>j</sub><i>w</i><sub>j</sub>²</div>
+        </article>
+
+        <article class="method-card">
+          <span class="method-step">STEP 04</span>
+          <h3>生成虚拟反事实</h3>
+          <p>政策前的平均水平差通过截距校正，随后将19个正权重供体的月度结果加权，得到“如果园区没有进入同样政策暴露环境”的预测路径。</p>
+          <div class="formula"><i>α</i> = <span class="overline">Y</span><sub>pre</sub><sup>T</sup> − Σ<sub>j</sub><i>w</i><sub>j</sub><span class="overline">Y</span><sub>j,pre</sub><sup>C</sup></div>
+          <div class="formula"><i>Y</i><sub>t</sub><sup>S</sup> = <i>α</i> + Σ<sub>j</sub><i>w</i><sub>j</sub><i>Y</i><sub>jt</sub><sup>C</sup></div>
+        </article>
+
+        <article class="method-card">
+          <span class="method-step">STEP 05</span>
+          <h3>计算政策后的相对效应</h3>
+          <p>比较实际园区与合成对照之间的差，并减去政策前12个月的平均差距。因此零表示差距未改变，负值表示园区夜光相对对照转弱。</p>
+          <div class="formula"><i>Effect</i><sub>t</sub> = (<i>Y</i><sub>t</sub><sup>T</sup> − <i>Y</i><sub>t</sub><sup>S</sup>) − <span class="overline">(<i>Y</i><sup>T</sup> − <i>Y</i><sup>S</sup>)</span><sub>pre</sub></div>
+        </article>
+      </div>
+
+      <div class="method-audit">
+        <div><b>当前拟合质量</b><span>政策前 RMSPE = 0.00876</span></div>
+        <p>当前1,620个候选网格来自具名行动供体池的合并。主模型已经可以使用；稳健性阶段将再从全部153,690个合格网格中为“291个园区的全国平均序列”独立筛选供体，检查候选池来源是否影响结论。</p>
+      </div>
+    </section>
+
     <section class="section-shell audit" id="audit">
       <div class="section-heading">
-        <div><span class="section-no">03</span><h2>质量审计</h2></div>
+        <div><span class="section-no">05</span><h2>质量审计</h2></div>
         <p>任何无法回到原始页面、图片或新闻来源的结论，都不会进入最终分析层。</p>
       </div>
       <div class="audit-grid" id="audit-grid"></div>
@@ -89,7 +170,7 @@
 
     <section class="section-shell evidence">
       <div class="section-heading">
-        <div><span class="section-no">04</span><h2>目标数据结构</h2></div>
+        <div><span class="section-no">06</span><h2>目标数据结构</h2></div>
         <p>一个地点可以拥有多个名称、功能、事件、来源与时间节点。</p>
       </div>
       <div class="schema-flow">
@@ -105,7 +186,7 @@
 
     <section class="section-shell blockers" id="blockers">
       <div class="section-heading">
-        <div><span class="section-no">05</span><h2>需要处理的问题</h2></div>
+        <div><span class="section-no">07</span><h2>需要处理的问题</h2></div>
         <p>这里只展示会影响下一阶段的真实阻塞项。</p>
       </div>
       <div id="blocker-list"></div>
@@ -118,5 +199,6 @@
     <a href="https://cyberscammonitor.net/" target="_blank" rel="noreferrer">SOURCE ↗</a>
   </footer>
   <script src="app.js"></script>
+  <script src="acquisition.js"></script>
 </body>
 </html>
