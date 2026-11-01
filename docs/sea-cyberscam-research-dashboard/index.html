@@ -104,59 +104,57 @@
 
     <section class="section-shell method" id="method">
       <div class="section-heading">
-        <div><span class="section-no">04</span><h2>合成对照网格如何计算</h2></div>
-        <p>合成对照不是一个真实地点，而是多个远离已知园区的1公里网格按政策前轨迹加权组成的虚拟反事实。</p>
+        <div><span class="section-no">04</span><h2>因果识别如何重审</h2></div>
+        <p>全国政策与具名行动回答不同问题。当前方法先检查共同支持与虚假日期，再并列报告DID、趋势调整和分期行动结果。</p>
       </div>
 
       <div class="method-stats" aria-label="合成对照当前样本规模">
-        <article><span>全国基础网格</span><strong>180,611</strong><p>柬埔寨境内1 km × 1 km网格</p></article>
-        <article><span>20 km外合格网格</span><strong>153,690</strong><p>远离所有已知园区，降低空间污染</p></article>
-        <article><span>候选／完整供体</span><strong>1,620 / 942</strong><p>942个具有完整政策前12个月数据</p></article>
-        <article><span>最终正权重供体</span><strong>19</strong><p>有效供体数10.8，最大权重15.1%</p></article>
+        <article><span>登记地点</span><strong>291</strong><p>全国政策环境，不等于当天全部被清剿</p></article>
+        <article><span>全国共同支持</span><strong>211</strong><p>至少5个政策前亮度相近、距园区20 km以上的网格</p></article>
+        <article><span>政策前建筑主样本</span><strong>206</strong><p>有Open Buildings证据并通过共同支持</p></article>
+        <article><span>具名行动</span><strong>14 / 8</strong><p>政策后首次行动地点／独立执法波次</p></article>
       </div>
 
       <div class="method-grid">
         <article class="method-card">
           <span class="method-step">STEP 01</span>
-          <h3>构造处理组月度序列</h3>
-          <p>每月先计算各园区0—1公里内质量码0/1的VIIRS夜间灯光，再对291个柬埔寨园区等权平均。使用反双曲正弦转换，避免极亮赌场或城市中心支配总体结果。</p>
-          <div class="formula"><i>Y</i><sub>t</sub><sup>T</sup> = (1 / 291) Σ<sub>i=1</sub><sup>291</sup> asinh(<i>NTL</i><sub>it</sub>)</div>
+          <h3>固定政策时间与过渡期</h3>
+          <p>官方行动从2025年6月27日开始，7月14日发布第01号命令。6—7月单列为过渡期；完整政策后月份从8月开始，避免把已受影响的月份当作清洁基准。</p>
+          <div class="formula">Pre: 2023-06—2025-05 · Transition: 2025-06—07 · Post: 2025-08—2026-08</div>
         </article>
 
         <article class="method-card">
           <span class="method-step">STEP 02</span>
-          <h3>筛选供体网格</h3>
-          <p>候选网格距任何已知园区至少20公里，并依据政策前夜光均值、趋势、波动、WorldPop人口、距边境距离和距合法赌场距离进行筛选。未来结果不参与筛选。</p>
-          <div class="formula"><i>d</i>(grid, any compound) ≥ 20 km</div>
+          <h3>先建立共同支持</h3>
+          <p>供体距已知园区至少20公里，且政策前平均夜光与园区相差不超过0.5个asinh单位。211个地点满足最低支持；80个地点仍保留在登记库，但不强行进入因果比较。</p>
+          <div class="formula">|mean<sub>pre</sub>(Y<sup>T</sup>) − mean<sub>pre</sub>(Y<sup>C</sup>)| ≤ 0.5</div>
         </article>
 
         <article class="method-card wide">
           <span class="method-step">STEP 03</span>
-          <h3>用政策前12个月拟合非负权重</h3>
-          <p>权重非负且总和为1。模型匹配的是去均值后的月度变化轨迹；单位截距吸收园区与普通网格之间永久存在的亮度水平差异。</p>
-          <div class="constraint"><span><i>w</i><sub>j</sub> ≥ 0</span><span>Σ<sub>j</sub><i>w</i><sub>j</sub> = 1</span></div>
-          <div class="formula multi">min<sub>w</sub> Σ<sub>t&lt;T</sub> [(<i>Y</i><sub>t</sub><sup>T</sup> − <span class="overline">Y</span><sub>pre</sub><sup>T</sup>) − Σ<sub>j</sub><i>w</i><sub>j</sub>(<i>Y</i><sub>jt</sub><sup>C</sup> − <span class="overline">Y</span><sub>j,pre</sub><sup>C</sup>)]² + λΣ<sub>j</sub><i>w</i><sub>j</sub>²</div>
+          <h3>地点—月份DID只作诊断</h3>
+          <p>加权双向固定效应DID吸收稳定地点差异和共同月份冲击。但2023、2024虚假政策日期也出现较大估计，说明园区与普通网格仍存在差异趋势，因此该模型不单独承担强因果结论。</p>
+          <div class="formula multi"><i>Y</i><sub>it</sub> = α<sub>i</sub> + λ<sub>t</sub> + β(Treated<sub>i</sub> × Post<sub>t</sub>) + ε<sub>it</sub></div>
         </article>
 
         <article class="method-card">
           <span class="method-step">STEP 04</span>
-          <h3>生成虚拟反事实</h3>
-          <p>政策前的平均水平差通过截距校正，随后将19个正权重供体的月度结果加权，得到“如果园区没有进入同样政策暴露环境”的预测路径。</p>
-          <div class="formula"><i>α</i> = <span class="overline">Y</span><sub>pre</sub><sup>T</sup> − Σ<sub>j</sub><i>w</i><sub>j</sub><span class="overline">Y</span><sub>j,pre</sub><sup>C</sup></div>
-          <div class="formula"><i>Y</i><sub>t</sub><sup>S</sup> = <i>α</i> + Σ<sub>j</sub><i>w</i><sub>j</sub><i>Y</i><sub>jt</sub><sup>C</sup></div>
+          <h3>趋势调整检验滞后收缩</h3>
+          <p>受控中断时间序列先拟合每个园区相对于匹配网格的政策前趋势，再测量政策后偏离。12个月与24个月趋势窗口都显示第10—13个月转为明显负值，但早期开始时间不同。</p>
+          <div class="formula">Deviation<sub>it</sub> = Gap<sub>it</sub> − predicted Gap<sub>it</sub> from pre-policy trend</div>
         </article>
 
         <article class="method-card">
           <span class="method-step">STEP 05</span>
-          <h3>计算政策后的相对效应</h3>
-          <p>比较实际园区与合成对照之间的差，并减去政策前12个月的平均差距。因此零表示差距未改变，负值表示园区夜光相对对照转弱。</p>
-          <div class="formula"><i>Effect</i><sub>t</sub> = (<i>Y</i><sub>t</sub><sup>T</sup> − <i>Y</i><sub>t</sub><sup>S</sup>) − <span class="overline">(<i>Y</i><sup>T</sup> − <i>Y</i><sup>S</sup>)</span><sub>pre</sub></div>
+          <h3>具名行动采用分期ATT</h3>
+          <p>每个行动园区只与未来6个月仍未被具名行动处理的登记园区比较；同一执法波次先在波次内平均，再按波次等权汇总。另排除5公里内控制地点并逐波次删除。</p>
+          <div class="formula">ATT(g,t) = ΔY<sub>acted,g,t</sub> − ΔY<sub>not-yet-acted,g,t</sub></div>
         </article>
       </div>
 
       <div class="method-audit">
-        <div><b>当前拟合质量</b><span>政策前 RMSPE = 0.00876</span></div>
-        <p>当前1,620个候选网格来自具名行动供体池的合并。主模型已经可以使用；稳健性阶段将再从全部153,690个合格网格中为“291个园区的全国平均序列”独立筛选供体，检查候选池来源是否影响结论。</p>
+        <div><b>当前识别判断</b><span>全国DID＝诊断；具名行动分期设计＝主模块</span></div>
+        <p>全国趋势调整在第10—13个月为−0.700（12个月趋势）与−0.389（24个月趋势）。具名行动的0—1公里短期接近零，但排除5公里内控制地点后，3—5公里在第1—2、3—4、5—6个月分别为−0.115、−0.199、−0.289；逐波次删除后符号保持为负。</p>
       </div>
     </section>
 
