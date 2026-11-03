@@ -1,0 +1,717 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-03",
+  "dictionary": {
+    "hotel_or_resort": {
+      "zh": "酒店或度假设施",
+      "en": "Hotel or resort"
+    },
+    "casino_or_entertainment": {
+      "zh": "赌场或娱乐设施",
+      "en": "Casino or entertainment"
+    },
+    "office_or_business": {
+      "zh": "办公或商务楼",
+      "en": "Office or business"
+    },
+    "apartment_or_residence": {
+      "zh": "公寓、住宅或宿舍",
+      "en": "Apartment, residence, or dormitory"
+    },
+    "factory_or_warehouse": {
+      "zh": "工厂或仓库",
+      "en": "Factory or warehouse"
+    },
+    "retail_or_market": {
+      "zh": "零售、商场或市场",
+      "en": "Retail, mall, or market"
+    },
+    "education": {
+      "zh": "学校、学院或大学",
+      "en": "Education"
+    },
+    "medical": {
+      "zh": "医院、诊所或医疗设施",
+      "en": "Medical"
+    },
+    "government_or_public_institution": {
+      "zh": "政府或公共机构",
+      "en": "Government or public institution"
+    },
+    "villa_or_house": {
+      "zh": "别墅或独立住宅",
+      "en": "Villa or house"
+    },
+    "mixed_use_complex": {
+      "zh": "混合用途综合体",
+      "en": "Mixed-use complex"
+    },
+    "purpose_built_compound": {
+      "zh": "专门建设的封闭园区或宿舍组团",
+      "en": "Purpose-built compound"
+    },
+    "construction_or_vacant": {
+      "zh": "建设中、未完工或空置",
+      "en": "Construction or vacant"
+    },
+    "insufficient_visual_evidence": {
+      "zh": "仍无法判断",
+      "en": "Insufficient visual evidence"
+    }
+  },
+  "total_unidentified": 71,
+  "reviewable_with_satellite": 65,
+  "unavailable_without_imagery": 6,
+  "items": [
+    {
+      "site_id": "csm:2087",
+      "post_id": "2087",
+      "name": "Site KS01",
+      "province": "Kampong Speu",
+      "country": "Cambodia",
+      "image": "visual-review-images/2087.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2095",
+      "post_id": "2095",
+      "name": "Site KP02",
+      "province": "Kampot",
+      "country": "Cambodia",
+      "image": "visual-review-images/2095.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2106",
+      "post_id": "2106",
+      "name": "Site KA01",
+      "province": "Kandal",
+      "country": "Cambodia",
+      "image": "visual-review-images/2106.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2108",
+      "post_id": "2108",
+      "name": "Site KA03",
+      "province": "Kandal",
+      "country": "Cambodia",
+      "image": "visual-review-images/2108.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2171",
+      "post_id": "2171",
+      "name": "Site PP16",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/2171.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2174",
+      "post_id": "2174",
+      "name": "Site PP18",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/2174.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2183",
+      "post_id": "2183",
+      "name": "Site PP22",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/2183.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2185",
+      "post_id": "2185",
+      "name": "Site PP24",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/2185.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2186",
+      "post_id": "2186",
+      "name": "Site PP10",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/2186.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2187",
+      "post_id": "2187",
+      "name": "Site PP11",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/2187.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2188",
+      "post_id": "2188",
+      "name": "Site PVH01",
+      "province": "Preah Vihear",
+      "country": "Cambodia",
+      "image": "visual-review-images/2188.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2196",
+      "post_id": "2196",
+      "name": "Site PVH02",
+      "province": "Preah Vihear",
+      "country": "Cambodia",
+      "image": "visual-review-images/2196.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2240",
+      "post_id": "2240",
+      "name": "Site SR02",
+      "province": "Svay Rieng",
+      "country": "Cambodia",
+      "image": "visual-review-images/2240.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2322",
+      "post_id": "2322",
+      "name": "Site SHK01",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2322.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2325",
+      "post_id": "2325",
+      "name": "Site SHK03",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2325.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2334",
+      "post_id": "2334",
+      "name": "Site SHK04",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2334.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2340",
+      "post_id": "2340",
+      "name": "Site SHK09",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2340.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2349",
+      "post_id": "2349",
+      "name": "Site SHK10",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2349.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2350",
+      "post_id": "2350",
+      "name": "Site SHK11",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2350.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2351",
+      "post_id": "2351",
+      "name": "Site SHK12",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2351.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2354",
+      "post_id": "2354",
+      "name": "Site SHK14",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2354.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2444",
+      "post_id": "2444",
+      "name": "Site OM01",
+      "province": "Oddar Meanchey",
+      "country": "Cambodia",
+      "image": "visual-review-images/2444.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2469",
+      "post_id": "2469",
+      "name": "Zhuang Yuan",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/2469.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2555",
+      "post_id": "2555",
+      "name": "Trimulia",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2555.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:2556",
+      "post_id": "2556",
+      "name": "Triumph International",
+      "province": "Preah Sihanouk",
+      "country": "Cambodia",
+      "image": "visual-review-images/2556.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3489",
+      "post_id": "3489",
+      "name": "Site KP01",
+      "province": "Kampot",
+      "country": "Cambodia",
+      "image": "visual-review-images/3489.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3498",
+      "post_id": "3498",
+      "name": "Site KA05",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3498.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3499",
+      "post_id": "3499",
+      "name": "Site KA06",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3499.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3514",
+      "post_id": "3514",
+      "name": "Site OM03",
+      "province": "Oddar Meanchey",
+      "country": "Cambodia",
+      "image": "visual-review-images/3514.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3515",
+      "post_id": "3515",
+      "name": "Site PA01",
+      "province": "Pailin",
+      "country": "Cambodia",
+      "image": "visual-review-images/3515.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3518",
+      "post_id": "3518",
+      "name": "Site PA04",
+      "province": "Pailin",
+      "country": "Cambodia",
+      "image": "visual-review-images/3518.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3525",
+      "post_id": "3525",
+      "name": "Site PA05",
+      "province": "Pailin",
+      "country": "Cambodia",
+      "image": "visual-review-images/3525.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3526",
+      "post_id": "3526",
+      "name": "Site PA06",
+      "province": "Pailin",
+      "country": "Cambodia",
+      "image": "visual-review-images/3526.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3546",
+      "post_id": "3546",
+      "name": "Site PP07",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3546.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3548",
+      "post_id": "3548",
+      "name": "Site PP09",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3548.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3550",
+      "post_id": "3550",
+      "name": "Site PP13",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3550.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3559",
+      "post_id": "3559",
+      "name": "Site PP15",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3559.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3560",
+      "post_id": "3560",
+      "name": "Site PP20",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3560.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3561",
+      "post_id": "3561",
+      "name": "Site PP21",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3561.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3570",
+      "post_id": "3570",
+      "name": "Site PP23",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3570.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3571",
+      "post_id": "3571",
+      "name": "Site PP25",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3571.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3572",
+      "post_id": "3572",
+      "name": "Site PP26",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3572.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3580",
+      "post_id": "3580",
+      "name": "Site RT01",
+      "province": "Ratanakiri",
+      "country": "Cambodia",
+      "image": "visual-review-images/3580.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3609",
+      "post_id": "3609",
+      "name": "Site SHK15",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3609.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3610",
+      "post_id": "3610",
+      "name": "Site SHK16",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3610.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3611",
+      "post_id": "3611",
+      "name": "Site SHK17",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3611.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3613",
+      "post_id": "3613",
+      "name": "Site SHK19",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3613.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3624",
+      "post_id": "3624",
+      "name": "Site SHK22",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3624.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3625",
+      "post_id": "3625",
+      "name": "Site SHK23",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3625.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3626",
+      "post_id": "3626",
+      "name": "Site SHK24",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3626.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3627",
+      "post_id": "3627",
+      "name": "Site SHK25",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3627.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3628",
+      "post_id": "3628",
+      "name": "Site SHK26",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3628.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3649",
+      "post_id": "3649",
+      "name": "Site SR04",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3649.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3650",
+      "post_id": "3650",
+      "name": "Site SR05",
+      "province": "Svay Rieng",
+      "country": "Cambodia",
+      "image": "visual-review-images/3650.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3651",
+      "post_id": "3651",
+      "name": "Site SR06",
+      "province": "Svay Rieng",
+      "country": "Cambodia",
+      "image": "visual-review-images/3651.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3652",
+      "post_id": "3652",
+      "name": "Site SR07",
+      "province": "Svay Rieng",
+      "country": "Cambodia",
+      "image": "visual-review-images/3652.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3660",
+      "post_id": "3660",
+      "name": "Site TAK01",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3660.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3962",
+      "post_id": "3962",
+      "name": "Site PP27",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3962.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3963",
+      "post_id": "3963",
+      "name": "Site PP28",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3963.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3964",
+      "post_id": "3964",
+      "name": "Site PP29",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3964.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3969",
+      "post_id": "3969",
+      "name": "Site PP31",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3969.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3981",
+      "post_id": "3981",
+      "name": "Site SHK27",
+      "province": "未记录",
+      "country": "Cambodia",
+      "image": "visual-review-images/3981.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3987",
+      "post_id": "3987",
+      "name": "Site SR10",
+      "province": "Svay Rieng",
+      "country": "Cambodia",
+      "image": "visual-review-images/3987.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3989",
+      "post_id": "3989",
+      "name": "Site SR08",
+      "province": "Svay Rieng",
+      "country": "Cambodia",
+      "image": "visual-review-images/3989.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    },
+    {
+      "site_id": "csm:3990",
+      "post_id": "3990",
+      "name": "Site SR09",
+      "province": "Svay Rieng",
+      "country": "Cambodia",
+      "image": "visual-review-images/3990.jpg",
+      "source_period": "2025 Q2—2026 Q2",
+      "current_label": "insufficient_visual_evidence"
+    }
+  ]
+}

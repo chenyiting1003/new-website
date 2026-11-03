@@ -17,10 +17,6 @@ function render(data) {
   document.querySelector('#progress-value').textContent = `${percent}%`;
   document.querySelector('#completed-tasks').textContent = `${done} / ${data.tasks.length}`;
 
-  document.querySelector('#metric-grid').innerHTML = data.metrics.map(m => `
-    <article class="metric-card"><span class="metric-label">${m.label}</span><strong>${m.value}</strong><p>${m.note}</p></article>
-  `).join('');
-
   const max = Math.max(...Object.values(data.countries));
   document.querySelector('#country-bars').innerHTML = Object.entries(data.countries).map(([name,value]) => `
     <div class="country-row"><span>${name}</span><div class="bar-track"><div class="bar-fill" style="width:${value/max*100}%"></div></div><b>${value}</b></div>

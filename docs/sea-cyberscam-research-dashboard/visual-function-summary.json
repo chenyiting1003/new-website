@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-03",
+  "total_sites": 339,
+  "assigned_sites": 268,
+  "unidentified_sites": 71,
+  "manual_review_queue": 247,
+  "function_counts": [
+    {
+      "key": "hotel_or_resort",
+      "label_zh": "酒店或度假设施",
+      "label_en": "Hotel or resort",
+      "count": 52
+    },
+    {
+      "key": "casino_or_entertainment",
+      "label_zh": "赌场或娱乐设施",
+      "label_en": "Casino or entertainment",
+      "count": 63
+    },
+    {
+      "key": "office_or_business",
+      "label_zh": "办公或商务楼",
+      "label_en": "Office or business",
+      "count": 5
+    },
+    {
+      "key": "apartment_or_residence",
+      "label_zh": "公寓、住宅或宿舍",
+      "label_en": "Apartment, residence, or dormitory",
+      "count": 13
+    },
+    {
+      "key": "factory_or_warehouse",
+      "label_zh": "工厂或仓库",
+      "label_en": "Factory or warehouse",
+      "count": 7
+    },
+    {
+      "key": "retail_or_market",
+      "label_zh": "零售、商场或市场",
+      "label_en": "Retail, mall, or market",
+      "count": 7
+    },
+    {
+      "key": "education",
+      "label_zh": "学校、学院或大学",
+      "label_en": "Education",
+      "count": 1
+    },
+    {
+      "key": "medical",
+      "label_zh": "医院、诊所或医疗设施",
+      "label_en": "Medical",
+      "count": 5
+    },
+    {
+      "key": "government_or_public_institution",
+      "label_zh": "政府或公共机构",
+      "label_en": "Government or public institution",
+      "count": 3
+    },
+    {
+      "key": "villa_or_house",
+      "label_zh": "别墅或独立住宅",
+      "label_en": "Villa or house",
+      "count": 4
+    },
+    {
+      "key": "mixed_use_complex",
+      "label_zh": "混合用途综合体",
+      "label_en": "Mixed-use complex",
+      "count": 1
+    },
+    {
+      "key": "purpose_built_compound",
+      "label_zh": "专门建设的封闭园区或宿舍组团",
+      "label_en": "Purpose-built compound",
+      "count": 80
+    },
+    {
+      "key": "construction_or_vacant",
+      "label_zh": "建设中、未完工或空置",
+      "label_en": "Construction or vacant",
+      "count": 27
+    },
+    {
+      "key": "insufficient_visual_evidence",
+      "label_zh": "仍无法判断",
+      "label_en": "Insufficient visual evidence",
+      "count": 71
+    }
+  ],
+  "confidence_counts": {
+    "low_visual_inference_review_required": 46,
+    "insufficient_visual_evidence": 201,
+    "high_documented_text_plus_visual": 22,
+    "medium_text_plus_visual": 66,
+    "medium_visual_consensus": 4
+  }
+}

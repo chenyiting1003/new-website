@@ -33,6 +33,7 @@
           <div class="hero-actions">
             <a class="button primary" href="#plan">查看研究计划</a>
             <a class="button ghost" href="#data">数据状态</a>
+            <a class="button ghost" href="#visual-functions">建筑功能</a>
             <a class="button ghost" href="#method">识别方法</a>
             <a class="button ghost" href="change-map.html">打开变化地图</a>
           </div>
@@ -56,27 +57,72 @@
     <section class="section-shell metrics" id="data">
       <div class="section-heading">
         <div><span class="section-no">01</span><h2>数据采集状态</h2></div>
-        <p>以来源、可追溯性和质量校验为中心，而不只统计文件数量。</p>
+        <p>把“已经获得什么”“如何加工”“最终实验真正用了什么”分开，避免把下载量误当成分析样本。</p>
       </div>
-      <div class="metric-grid" id="metric-grid"></div>
-      <div class="coverage-panel">
-        <div>
-          <div class="panel-kicker">GEOGRAPHIC COVERAGE</div>
-          <h3>网站当前覆盖</h3>
-          <p>当前 Cyber Scam Monitor 数据以柬埔寨与缅甸为主。后续通过新闻数据扩展区域范围。</p>
+
+      <nav class="data-part-nav" aria-label="数据状态三部分">
+        <a href="#data-source"><b>01</b><span>源数据</span><small>本地已经保存什么</small></a>
+        <a href="#data-processing"><b>02</b><span>处理流程</span><small>如何清洗、匹配与构造变量</small></a>
+        <a href="#data-experiment"><b>03</b><span>实验用数</span><small>当前识别设计实际采用什么</small></a>
+      </nav>
+
+      <section class="data-part" id="data-source">
+        <div class="data-part-heading"><span>PART 01 · SOURCE DATA</span><h3>源数据层</h3><p>原始页面、新闻、官方记录、影像和统计数据均保留来源、抓取时间与校验信息。</p></div>
+        <div class="status-metric-grid" id="source-metric-grid"></div>
+        <div class="coverage-panel">
+          <div>
+            <div class="panel-kicker">GEOGRAPHIC COVERAGE</div>
+            <h3>园区登记库覆盖</h3>
+            <p>当前园区实体以柬埔寨与缅甸为主；六国人口与夜光用于区域背景和跨境比较。</p>
+          </div>
+          <div class="country-bars" id="country-bars"></div>
         </div>
-        <div class="country-bars" id="country-bars"></div>
+        <div class="acquisition-header"><div class="panel-kicker">POPULATION · ECONOMY · URBAN ACTIVITY</div><h3>六国人口与经济数据采集</h3><p>柬埔寨、缅甸优先；老挝、泰国、越南和马来西亚半岛用于跨境比较。下载文件不等于可分析面板。</p></div>
+        <p id="acquisition-snapshot" class="acquisition-note">正在读取采集快照…</p>
+        <div id="acquisition-grid" class="acquisition-grid"></div>
+        <details class="acquisition-next"><summary>后续数据与研究边界</summary><p>继续补齐可获得的官方统计；所有未下载或无法验证尺度的数据保持未完成状态。人口模型、户籍人口和园区内部实际人口始终分开。</p></details>
+      </section>
+
+      <section class="data-part" id="data-processing">
+        <div class="data-part-heading"><span>PART 02 · PROCESSING</span><h3>数据如何被处理</h3><p>原始文件不直接进入结论。每一种资料先独立清洗，再通过园区ID、坐标与事件时间连接。</p></div>
+        <div class="status-metric-grid" id="processing-metric-grid"></div>
+        <div class="processing-flow" aria-label="数据处理流程">
+          <article><b>01 · 归档与校验</b><p>保存原页面、原图、URL、时间与SHA-256；重复文件按哈希识别。</p></article>
+          <article><b>02 · 实体与时间匹配</b><p>用名称、别名、地址和坐标连接园区；文章日期与事件日期分开。</p></article>
+          <article><b>03 · 文本与图像特征</b><p>抽取过去用途、牌照、变化与非法活动；图像功能、OCR和车辆线索分层保存。</p></article>
+          <article><b>04 · 空间结果变量</b><p>计算0—1、1—3、3—5公里夜光、POI、人口和建筑变化，并处理重叠像元。</p></article>
+          <article><b>05 · 面板与反事实</b><p>构造园区／供体网格×月份或日期面板，冻结处理时间和执法波次。</p></article>
+          <article><b>06 · 审计与敏感性</b><p>检查共同支持、虚假日期、边境冲突、缺测、质量码与对照污染。</p></article>
+        </div>
+      </section>
+
+      <section class="data-part" id="data-experiment">
+        <div class="data-part-heading"><span>PART 03 · EXPERIMENT INPUTS</span><h3>当前实验真正使用的数据</h3><p>主分析不是把所有已下载资料一起回归，而是按识别问题选取固定样本、结果变量和对照。</p></div>
+        <div class="status-metric-grid" id="experiment-metric-grid"></div>
+        <div class="experiment-schema">
+          <article><span>处理</span><b>全国政策环境＋具名地方行动</b><p>全国模块以2025年6—7月为过渡期；具名行动按实际日期和首次行动波次处理。</p></article>
+          <article><span>主要结果</span><b>月度夜间灯光</b><p>园区0—1公里为主结果；1—3、3—5公里用于扩散、迁移与恢复检验。</p></article>
+          <article><span>辅助结果</span><b>POI商业结构与逐日夜光</b><p>用于检验商业重组、立即反应与滞后，不替代月度主结果。</p></article>
+          <article><span>对照</span><b>可比非园区网格／尚未行动园区</b><p>全国模块使用20公里外共同支持网格；具名行动使用未来6个月尚未处理地点。</p></article>
+        </div>
+        <a class="inline-link" href="#method">查看完整识别方法与公式 →</a>
+      </section>
+    </section>
+
+    <section class="section-shell visual-functions" id="visual-functions">
+      <div class="section-heading">
+        <div><span class="section-no">VIS</span><h2>园区建筑功能识别</h2></div>
+        <p>园区主体照片决定主要功能，100米街景只作辅助。视觉推断不等于牌照、法律状态或实际经营用途。</p>
       </div>
-      <div class="acquisition-header"><div class="panel-kicker">POPULATION · ECONOMY · URBAN ACTIVITY</div><h3>六国人口与经济数据采集</h3><p>柬埔寨、缅甸优先；老挝、泰国、越南和马来西亚半岛用于跨境比较。下载文件不等于可分析面板。</p></div>
-      <div class="dataset-layers">
-        <article><b>A · 区域社会经济面板</b><p>行政单元 × 年份。保留官方原尺度、统计口径和边界版本，不下推到 100 米。</p></article>
-        <article><b>B · 网格城市活动面板</b><p>500 米／1 公里 × 月份。人口是年度模型值，夜光是月度代理指标，不伪造月度人口。</p></article>
-        <article><b>C · 园区事件数据库</b><p>园区 × 事件时间。区分文章日期、事件日期和时间精度，再连接区域与网格。</p></article>
+      <div class="visual-summary" id="visual-summary"></div>
+      <div class="visual-grid">
+        <article class="function-chart-card"><div class="panel-kicker">FUNCTION DISTRIBUTION</div><h3>识别功能分布</h3><div id="function-bars" class="function-bars"></div></article>
+        <article class="confidence-card"><div class="panel-kicker">EVIDENCE CONFIDENCE</div><h3>证据置信度</h3><div id="confidence-list" class="confidence-list"></div><p>低置信度与证据不足地点进入人工复核，不自动覆盖主表。</p></article>
       </div>
-      <ol class="acquisition-workflow"><li>核实来源与许可</li><li>下载原件与校验哈希</li><li>检查字段、缺失与年份</li><li>对齐行政编码／空间范围</li><li>质量筛选与空间连接</li><li>评估面板与研究设计</li></ol>
-      <p id="acquisition-snapshot" class="acquisition-note">正在读取采集快照…</p>
-      <div id="acquisition-grid" class="acquisition-grid"></div>
-      <details class="acquisition-next"><summary>后续数据与研究边界</summary><p>继续补齐柬埔寨人口普查与家庭调查、缅甸 2014 镇区普查及 P-code 历史；随后接入泰国 DOPA／GPP、老挝普查、越南省级统计、马来西亚县级人口与 GDP、GHSL／Dynamic World。均需逐项核验，未标记为已经下载。</p><p>跨国栅格统一前先固定国家掩膜与等面积网格；人口计数使用守恒聚合，夜光保留质量标记、有效观测数与缺测。马来西亚国家原件必须排除东马后才能进入研究层。战争、停电、迁移与边境贸易是混杂因素，不能把夜光变化直接解释为园区的经济影响。</p></details>
+      <div class="manual-review-callout">
+        <div><span>MANUAL REVIEW</span><h3>71个地点仍无法从原始照片识别</h3><p>其中65个柬埔寨地点已有2025 Q2—2026 Q2同范围遥感对比图，可使用同一功能字典逐一复核；6个缅甸地点因没有可用影像继续保留“无法判断”。</p></div>
+        <a class="button primary" href="visual-review.html">开始人工识别 65 个地点</a>
+      </div>
     </section>
 
     <section class="section-shell plan" id="plan">
@@ -207,6 +253,8 @@
     <a href="https://cyberscammonitor.net/" target="_blank" rel="noreferrer">SOURCE ↗</a>
   </footer>
   <script src="app.js"></script>
+  <script src="data-status.js"></script>
   <script src="acquisition.js"></script>
+  <script src="visual-analysis.js"></script>
 </body>
 </html>
