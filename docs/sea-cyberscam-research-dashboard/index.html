@@ -35,6 +35,7 @@
             <a class="button ghost" href="#data">数据状态</a>
             <a class="button ghost" href="#visual-functions">建筑功能</a>
             <a class="button ghost" href="#method">识别方法</a>
+            <a class="button ghost" href="#results">阶段结果</a>
             <a class="button ghost" href="change-map.html">打开变化地图</a>
           </div>
         </div>
@@ -120,8 +121,8 @@
         <article class="confidence-card"><div class="panel-kicker">EVIDENCE CONFIDENCE</div><h3>证据置信度</h3><div id="confidence-list" class="confidence-list"></div><p>低置信度与证据不足地点进入人工复核，不自动覆盖主表。</p></article>
       </div>
       <div class="manual-review-callout">
-        <div><span>MANUAL REVIEW</span><h3>71个地点仍无法从原始照片识别</h3><p>其中65个柬埔寨地点已有2025 Q2—2026 Q2同范围遥感对比图，可使用同一功能字典逐一复核；6个缅甸地点因没有可用影像继续保留“无法判断”。</p></div>
-        <a class="button primary" href="visual-review.html">开始人工识别 65 个地点</a>
+        <div><span>MANUAL REVIEW</span><h3>66个地点仍无法从原始照片识别</h3><p>现场调研和地图商户点资料已补充5个地点；剩余60个柬埔寨地点已有2025 Q2—2026 Q2同范围遥感对比图，可使用同一功能字典逐一复核。6个缅甸地点因没有可用影像继续保留“无法判断”。</p></div>
+        <a class="button primary" href="visual-review.html">继续人工识别 60 个地点</a>
       </div>
     </section>
 
@@ -212,6 +213,49 @@
         <p>供体距离敏感性无法同时实现大样本、低污染和良好背景平衡：加入地理硬卡尺后只保留27个地点，政策前夜光动态仍不平衡。因此全国模块只作三角验证。具名行动波次级检验中，1—3公里第3—4个月有7/8个波次为负（符号翻转p=0.0469），但9项Holm校正后没有结果低于0.05，结论限定为跨波次一致的提示性证据。</p>
         <p>上一版冻结分析把14个行动分为7个A级严格官方、6个B级佐证或中等实体匹配、1个C级监管媒体。A级样本关键外圈窗口为6/6波次负向，排除冲突省份后仍为5/5；多重校正后的最低p值为0.281，因此增强方向一致性，但不改变提示性结论。新增地点已完成夜光提取和第一轮匹配；完整稳健性套件重跑前，不用新增样本均值替代这组已审计结论。</p>
       </div>
+    </section>
+
+    <section class="section-shell result-figures" id="results">
+      <div class="section-heading">
+        <div><span class="section-no">RESULTS</span><h2>阶段性分析图</h2></div>
+        <p>以下为2026-11-02冻结并完成一致性审计的主规格图。具名行动结果对应14个首次行动地点、8个独立执法波次；扩展行动台账尚未替换这组结果。</p>
+      </div>
+
+      <div class="result-status-strip">
+        <article><span>全国登记地点</span><strong>291</strong><p>全部保留在描述数据库</p></article>
+        <article><span>主因果支持样本</span><strong>206</strong><p>政策前建筑存在＋夜光共同支持</p></article>
+        <article><span>具名行动主样本</span><strong>14 / 8</strong><p>首次行动地点／独立执法波次</p></article>
+        <article><span>机制样本</span><strong>13</strong><p>可连接历史OSM变化的行动地点</p></article>
+      </div>
+
+      <div class="result-gallery">
+        <figure class="result-figure wide">
+          <a href="analysis-figures/figure_1_identification_sample_flow.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_1_identification_sample_flow.png" alt="因果识别样本从291个地点筛选至206个主样本的流程图" loading="lazy"></a>
+          <figcaption><span>FIGURE 01 · SAMPLE</span><h3>识别样本如何形成</h3><p>291个柬埔寨地点中，286个具有政策前建筑证据，211个满足最低夜光共同支持，206个同时满足两项条件。样本减少只发生在因果估计阶段，不会从描述数据库删除地点。</p></figcaption>
+        </figure>
+
+        <figure class="result-figure wide">
+          <a href="analysis-figures/figure_2_national_policy_dynamics.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_2_national_policy_dynamics.png" alt="全国政策动态DID诊断和趋势调整结果" loading="lazy"></a>
+          <figcaption><span>FIGURE 02 · NATIONAL POLICY</span><h3>全国政策：后期夜间活动相对减弱，但全国DID只作诊断</h3><p>左图的虚假政策年份检验未通过，因此不能单独承担强因果结论。右图以12个月和24个月政策前趋势调整，两种规格均显示后期收缩，但早期路径不同，不能给出所有园区统一的精确收缩起点。</p></figcaption>
+        </figure>
+
+        <figure class="result-figure">
+          <a href="analysis-figures/figure_3_named_action_event_paths.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_3_named_action_event_paths.png" alt="具名执法行动前后不同距离夜间灯光路径" loading="lazy"></a>
+          <figcaption><span>FIGURE 03 · EVENT PATH</span><h3>具名行动后的空间路径</h3><p>0—1公里核心区没有稳定的立即下降；1—5公里外圈在行动后数月呈现更一致的负向路径。行动当月只作描述，主窗口从行动后第1个完整月开始。</p></figcaption>
+        </figure>
+
+        <figure class="result-figure">
+          <a href="analysis-figures/figure_4_named_action_stage_effects.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_4_named_action_stage_effects.png" alt="具名行动按距离和阶段估计的夜间灯光效应" loading="lazy"></a>
+          <figcaption><span>FIGURE 04 · DISTANCE</span><h3>外围减弱比核心区更一致</h3><p>0—1公里三个阶段的区间均跨零；1—3公里在第3—4个月转弱，3—5公里在第3—6个月持续转弱。它支持外围夜间活动相对减弱，不等同于确认企业关闭或清剿成功。</p></figcaption>
+        </figure>
+
+        <figure class="result-figure wide">
+          <a href="analysis-figures/figure_5_poi_mechanism.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_5_poi_mechanism.png" alt="具名行动后历史OSM商业类别相对城市份额变化" loading="lazy"></a>
+          <figcaption><span>FIGURE 05 · POI MECHANISM</span><h3>商业结构变化提供机制线索</h3><p>行动后第3—4个月，多数历史OSM类别的园区周边相对城市份额下降；该冻结窗口中的office/business为小幅正值。样本只有13个地点，而且OSM变化是地图对象变化，不是经核验的商铺开关日期。</p></figcaption>
+        </figure>
+      </div>
+
+      <div class="result-limit"><b>共同解释边界</b><p>夜间灯光是<code>asinh</code>转换后的NASA Black Marble月度辐亮度，用于代理夜间活动；它不是GDP、就业、居民福利或非法活动规模的直接测量。图中不确定区间和未通过的诊断必须与点估计同时阅读。</p></div>
     </section>
 
     <section class="section-shell audit" id="audit">

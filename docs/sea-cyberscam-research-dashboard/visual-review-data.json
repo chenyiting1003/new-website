@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03",
+  "generated_at": "2026-11-04",
   "dictionary": {
     "hotel_or_resort": {
       "zh": "酒店或度假设施",
@@ -59,8 +59,8 @@
       "en": "Insufficient visual evidence"
     }
   },
-  "total_unidentified": 71,
-  "reviewable_with_satellite": 65,
+  "total_unidentified": 66,
+  "reviewable_with_satellite": 60,
   "unavailable_without_imagery": 6,
   "items": [
     {
@@ -120,26 +120,6 @@
       "province": "未记录",
       "country": "Cambodia",
       "image": "visual-review-images/2174.jpg",
-      "source_period": "2025 Q2—2026 Q2",
-      "current_label": "insufficient_visual_evidence"
-    },
-    {
-      "site_id": "csm:2183",
-      "post_id": "2183",
-      "name": "Site PP22",
-      "province": "未记录",
-      "country": "Cambodia",
-      "image": "visual-review-images/2183.jpg",
-      "source_period": "2025 Q2—2026 Q2",
-      "current_label": "insufficient_visual_evidence"
-    },
-    {
-      "site_id": "csm:2185",
-      "post_id": "2185",
-      "name": "Site PP24",
-      "province": "未记录",
-      "country": "Cambodia",
-      "image": "visual-review-images/2185.jpg",
       "source_period": "2025 Q2—2026 Q2",
       "current_label": "insufficient_visual_evidence"
     },
@@ -244,26 +224,6 @@
       "current_label": "insufficient_visual_evidence"
     },
     {
-      "site_id": "csm:2350",
-      "post_id": "2350",
-      "name": "Site SHK11",
-      "province": "Preah Sihanouk",
-      "country": "Cambodia",
-      "image": "visual-review-images/2350.jpg",
-      "source_period": "2025 Q2—2026 Q2",
-      "current_label": "insufficient_visual_evidence"
-    },
-    {
-      "site_id": "csm:2351",
-      "post_id": "2351",
-      "name": "Site SHK12",
-      "province": "Preah Sihanouk",
-      "country": "Cambodia",
-      "image": "visual-review-images/2351.jpg",
-      "source_period": "2025 Q2—2026 Q2",
-      "current_label": "insufficient_visual_evidence"
-    },
-    {
       "site_id": "csm:2354",
       "post_id": "2354",
       "name": "Site SHK14",
@@ -290,16 +250,6 @@
       "province": "未记录",
       "country": "Cambodia",
       "image": "visual-review-images/2469.jpg",
-      "source_period": "2025 Q2—2026 Q2",
-      "current_label": "insufficient_visual_evidence"
-    },
-    {
-      "site_id": "csm:2555",
-      "post_id": "2555",
-      "name": "Trimulia",
-      "province": "Preah Sihanouk",
-      "country": "Cambodia",
-      "image": "visual-review-images/2555.jpg",
       "source_period": "2025 Q2—2026 Q2",
       "current_label": "insufficient_visual_evidence"
     },

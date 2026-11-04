@@ -1,16 +1,16 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03",
+  "generated_at": "2026-11-04",
   "total_sites": 339,
-  "assigned_sites": 268,
-  "unidentified_sites": 71,
-  "manual_review_queue": 247,
+  "assigned_sites": 273,
+  "unidentified_sites": 66,
+  "manual_review_queue": 242,
   "function_counts": [
     {
       "key": "hotel_or_resort",
       "label_zh": "酒店或度假设施",
       "label_en": "Hotel or resort",
-      "count": 52
+      "count": 56
     },
     {
       "key": "casino_or_entertainment",
@@ -28,7 +28,7 @@
       "key": "apartment_or_residence",
       "label_zh": "公寓、住宅或宿舍",
       "label_en": "Apartment, residence, or dormitory",
-      "count": 13
+      "count": 14
     },
     {
       "key": "factory_or_warehouse",
@@ -88,7 +88,7 @@
       "key": "insufficient_visual_evidence",
       "label_zh": "仍无法判断",
       "label_en": "Insufficient visual evidence",
-      "count": 71
+      "count": 66
     }
   ],
   "confidence_counts": {
