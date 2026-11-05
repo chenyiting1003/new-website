@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="access-locked">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="园区建筑原始功能人工复核">
+  <title>建筑功能人工复核｜东南亚电诈空间变化</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="visual-review.css">
+  <link rel="stylesheet" href="access.css">
+  <script src="access.js"></script>
+</head>
+<body class="review-page">
+  <header class="topbar">
+    <a class="brand" href="index.html#visual-functions"><span class="brand-mark">←</span><span>返回研究看板</span></a>
+    <div class="top-meta"><span class="pulse"></span><span>MANUAL VISUAL REVIEW</span></div>
+  </header>
+
+  <main class="review-shell">
+    <section class="review-intro">
+      <div class="eyebrow">SAME DICTIONARY · SAME KEYS · 人工复核</div>
+      <h1>无法识别地点的<br><em>建筑功能复核</em></h1>
+      <p>这里展示60个柬埔寨地点的2025 Q2—2026 Q2同范围遥感对比图。另有5个地点已通过现场调研或地图商户点资料补充当前功能；所有选项严格复用主分析表的功能字典。6个没有任何可用影像的缅甸地点不在本页强行判断。</p>
+      <div class="review-warning"><b>证据边界</b><span>10米级Sentinel-2影像适合观察规模、布局和变化，但通常不能单独确认酒店、赌场、办公楼等具体经营功能。无法可靠判断时，请保留“仍无法判断”。</span></div>
+    </section>
+
+    <section class="review-toolbar" aria-label="复核进度与筛选">
+      <div class="review-progress-copy"><span>复核进度</span><strong id="review-progress-text">0 / 60</strong></div>
+      <div class="review-progress-track"><i id="review-progress-bar"></i></div>
+      <label>显示
+        <select id="review-filter">
+          <option value="all">全部地点</option>
+          <option value="unreviewed">仅未复核</option>
+          <option value="reviewed">仅已复核</option>
+        </select>
+      </label>
+      <label>省份
+        <select id="province-filter"><option value="all">全部省份</option></select>
+      </label>
+      <button type="button" id="export-review">导出CSV</button>
+    </section>
+
+    <section class="review-workspace" id="review-workspace" hidden>
+      <aside class="review-queue" aria-label="复核地点列表">
+        <div class="queue-heading"><b>地点列表</b><span id="queue-count">0</span></div>
+        <div id="queue-list"></div>
+      </aside>
+
+      <article class="review-card">
+        <header class="review-card-header">
+          <div><span id="review-position">地点 1 / 65</span><h2 id="site-name">—</h2></div>
+          <dl><div><dt>Site ID</dt><dd id="site-id">—</dd></div><div><dt>省份</dt><dd id="site-province">—</dd></div></dl>
+        </header>
+
+        <figure class="review-image-frame">
+          <a id="review-image-link" href="#" target="_blank" rel="noreferrer" title="打开原尺寸图像">
+            <img id="review-image" alt="园区季度遥感对比图">
+          </a>
+          <figcaption><span id="image-period">—</span><b>点击图像可打开原尺寸</b></figcaption>
+        </figure>
+
+        <form id="review-form">
+          <fieldset>
+            <legend>主要建筑功能 <small>单选 · 与主表字典完全一致</small></legend>
+            <div class="function-options" id="function-options"></div>
+          </fieldset>
+          <div class="review-fields">
+            <label>人工判断置信度
+              <select id="review-confidence">
+                <option value="">请选择</option>
+                <option value="high">高</option>
+                <option value="medium">中</option>
+                <option value="low">低</option>
+              </select>
+            </label>
+            <label>复核备注
+              <textarea id="review-notes" rows="3" placeholder="只记录可见依据，例如建筑排列、围墙、停车区；不要根据地点名称猜测。"></textarea>
+            </label>
+          </div>
+          <div class="review-actions">
+            <button type="button" class="button ghost" id="previous-site">← 上一个</button>
+            <button type="submit" class="button primary">保存并下一个 →</button>
+            <button type="button" class="text-button" id="clear-site">清除此地点判断</button>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <section id="review-empty" class="review-empty" hidden>
+      <h2>当前筛选条件下没有地点</h2>
+      <p>调整上方筛选条件，或导出已经完成的复核结果。</p>
+    </section>
+
+    <p id="review-error" class="load-error" role="alert"></p>
+  </main>
+
+  <script src="visual-review.js"></script>
+</body>
+</html>

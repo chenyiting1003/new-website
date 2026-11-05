@@ -1,11 +1,13 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="access-locked">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="东南亚电诈空间变化研究计划、数据采集状态和质量审计看板">
   <title>东南亚电诈空间变化｜研究看板</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="access.css">
+  <script src="access.js"></script>
 </head>
 <body>
   <div class="page-grid" aria-hidden="true"></div>
@@ -31,6 +33,10 @@
           <div class="hero-actions">
             <a class="button primary" href="#plan">查看研究计划</a>
             <a class="button ghost" href="#data">数据状态</a>
+            <a class="button ghost" href="#visual-functions">建筑功能</a>
+            <a class="button ghost" href="#method">识别方法</a>
+            <a class="button ghost" href="#results">阶段结果</a>
+            <a class="button ghost" href="change-map.html">打开变化地图</a>
           </div>
         </div>
         <div class="progress-module" aria-label="总体研究进度">
@@ -52,16 +58,71 @@
     <section class="section-shell metrics" id="data">
       <div class="section-heading">
         <div><span class="section-no">01</span><h2>数据采集状态</h2></div>
-        <p>以来源、可追溯性和质量校验为中心，而不只统计文件数量。</p>
+        <p>把“已经获得什么”“如何加工”“最终实验真正用了什么”分开，避免把下载量误当成分析样本。</p>
       </div>
-      <div class="metric-grid" id="metric-grid"></div>
-      <div class="coverage-panel">
-        <div>
-          <div class="panel-kicker">GEOGRAPHIC COVERAGE</div>
-          <h3>网站当前覆盖</h3>
-          <p>当前 Cyber Scam Monitor 数据以柬埔寨与缅甸为主。后续通过新闻数据扩展区域范围。</p>
+
+      <nav class="data-part-nav" aria-label="数据状态三部分">
+        <a href="#data-source"><b>01</b><span>源数据</span><small>本地已经保存什么</small></a>
+        <a href="#data-processing"><b>02</b><span>处理流程</span><small>如何清洗、匹配与构造变量</small></a>
+        <a href="#data-experiment"><b>03</b><span>实验用数</span><small>当前识别设计实际采用什么</small></a>
+      </nav>
+
+      <section class="data-part" id="data-source">
+        <div class="data-part-heading"><span>PART 01 · SOURCE DATA</span><h3>源数据层</h3><p>原始页面、新闻、官方记录、影像和统计数据均保留来源、抓取时间与校验信息。</p></div>
+        <div class="status-metric-grid" id="source-metric-grid"></div>
+        <div class="coverage-panel">
+          <div>
+            <div class="panel-kicker">GEOGRAPHIC COVERAGE</div>
+            <h3>园区登记库覆盖</h3>
+            <p>当前园区实体以柬埔寨与缅甸为主；六国人口与夜光用于区域背景和跨境比较。</p>
+          </div>
+          <div class="country-bars" id="country-bars"></div>
         </div>
-        <div class="country-bars" id="country-bars"></div>
+        <div class="acquisition-header"><div class="panel-kicker">POPULATION · ECONOMY · URBAN ACTIVITY</div><h3>六国人口与经济数据采集</h3><p>柬埔寨、缅甸优先；老挝、泰国、越南和马来西亚半岛用于跨境比较。下载文件不等于可分析面板。</p></div>
+        <p id="acquisition-snapshot" class="acquisition-note">正在读取采集快照…</p>
+        <div id="acquisition-grid" class="acquisition-grid"></div>
+        <details class="acquisition-next"><summary>后续数据与研究边界</summary><p>继续补齐可获得的官方统计；所有未下载或无法验证尺度的数据保持未完成状态。人口模型、户籍人口和园区内部实际人口始终分开。</p></details>
+      </section>
+
+      <section class="data-part" id="data-processing">
+        <div class="data-part-heading"><span>PART 02 · PROCESSING</span><h3>数据如何被处理</h3><p>原始文件不直接进入结论。每一种资料先独立清洗，再通过园区ID、坐标与事件时间连接。</p></div>
+        <div class="status-metric-grid" id="processing-metric-grid"></div>
+        <div class="processing-flow" aria-label="数据处理流程">
+          <article><b>01 · 归档与校验</b><p>保存原页面、原图、URL、时间与SHA-256；重复文件按哈希识别。</p></article>
+          <article><b>02 · 实体与时间匹配</b><p>用名称、别名、地址和坐标连接园区；文章日期与事件日期分开。</p></article>
+          <article><b>03 · 文本与图像特征</b><p>抽取过去用途、牌照、变化与非法活动；图像功能、OCR和车辆线索分层保存。</p></article>
+          <article><b>04 · 空间结果变量</b><p>计算0—1、1—3、3—5公里夜光、POI、人口和建筑变化，并处理重叠像元。</p></article>
+          <article><b>05 · 面板与反事实</b><p>构造园区／供体网格×月份或日期面板，冻结处理时间和执法波次。</p></article>
+          <article><b>06 · 审计与敏感性</b><p>检查共同支持、虚假日期、边境冲突、缺测、质量码与对照污染。</p></article>
+        </div>
+      </section>
+
+      <section class="data-part" id="data-experiment">
+        <div class="data-part-heading"><span>PART 03 · EXPERIMENT INPUTS</span><h3>当前实验真正使用的数据</h3><p>主分析不是把所有已下载资料一起回归，而是按识别问题选取固定样本、结果变量和对照。</p></div>
+        <div class="status-metric-grid" id="experiment-metric-grid"></div>
+        <div class="experiment-schema">
+          <article><span>处理</span><b>全国政策环境＋具名地方行动</b><p>全国模块以2025年6—7月为过渡期；具名行动按实际日期和首次行动波次处理。</p></article>
+          <article><span>主要结果</span><b>月度夜间灯光</b><p>园区0—1公里为主结果；1—3、3—5公里用于扩散、迁移与恢复检验。</p></article>
+          <article><span>辅助结果</span><b>POI商业结构与逐日夜光</b><p>用于检验商业重组、立即反应与滞后，不替代月度主结果。</p></article>
+          <article><span>对照</span><b>三层可比网格／尚未行动园区</b><p>全国模块并列同城市、同省与全国相似背景供体；具名行动使用未来6个月尚未处理地点。</p></article>
+        </div>
+        <a class="inline-link" href="#method">查看完整识别方法与公式 →</a>
+      </section>
+    </section>
+
+    <section class="section-shell visual-functions" id="visual-functions">
+      <div class="section-heading">
+        <div><span class="section-no">VIS</span><h2>园区建筑功能识别</h2></div>
+        <p>园区主体照片决定主要功能，100米街景只作辅助。视觉推断不等于牌照、法律状态或实际经营用途。</p>
+      </div>
+      <div class="visual-summary" id="visual-summary"></div>
+      <div class="visual-grid">
+        <article class="function-chart-card"><div class="panel-kicker">FUNCTION DISTRIBUTION</div><h3>识别功能分布</h3><div id="function-bars" class="function-bars"></div></article>
+        <article class="confidence-card"><div class="panel-kicker">EVIDENCE CONFIDENCE</div><h3>证据置信度</h3><div id="confidence-list" class="confidence-list"></div><p>低置信度与证据不足地点进入人工复核，不自动覆盖主表。</p></article>
+      </div>
+      <div class="manual-review-callout">
+        <div><span>MANUAL REVIEW</span><h3>当前功能与历史功能分开复核</h3><p>当前可见功能仍有66个地点无法判断；另有247个地点需要核验历史／原始功能，其中75个因证据价值和影像条件进入第一优先级。PP15“天空之城”、PP21“柬埔寨湖北总商会”、SHK23“皇家利华国际大酒店”先作为待核验名称别名保存，不据此推断牌照、业主或违法状态。</p></div>
+        <a class="button primary" href="visual-review.html">继续当前功能人工复核</a>
       </div>
     </section>
 
@@ -72,6 +133,7 @@
           <button class="filter active" data-filter="all">全部</button>
           <button class="filter" data-filter="done">已完成</button>
           <button class="filter" data-filter="active">进行中</button>
+          <button class="filter" data-filter="paused">已暂缓</button>
           <button class="filter" data-filter="blocked">受阻</button>
           <button class="filter" data-filter="planned">待开始</button>
         </div>
@@ -79,9 +141,130 @@
       <div class="task-list" id="task-list"></div>
     </section>
 
+    <section class="section-shell audit" id="conclusions">
+      <div class="section-heading">
+        <div><span class="section-no">03</span><h2>阶段性结论</h2></div>
+        <p>区分数据直接支持的结果与仍需进一步检验的机制解释。</p>
+      </div>
+      <div class="audit-grid" id="conclusion-grid"></div>
+    </section>
+
+    <section class="section-shell method" id="method">
+      <div class="section-heading">
+        <div><span class="section-no">04</span><h2>因果识别如何重审</h2></div>
+        <p>全国政策与具名行动回答不同问题。当前方法先检查共同支持与虚假日期，再并列报告DID、趋势调整和分期行动结果。</p>
+      </div>
+
+      <div class="method-stats" aria-label="合成对照当前样本规模">
+        <article><span>登记地点</span><strong>291</strong><p>全国政策环境，不等于当天全部被清剿</p></article>
+        <article><span>三层共同支持</span><strong>37 / 71 / 211</strong><p>同城市／同省／全国相似背景；缺乏支持的地点不强行外推</p></article>
+        <article><span>政策前建筑主样本</span><strong>206</strong><p>有Open Buildings证据并通过共同支持</p></article>
+        <article><span>同城市严格支持</span><strong>37 / 221</strong><p>四个核心城市；城市×月份固定效应，未强行放宽共同支持</p></article>
+        <article><span>空间去重集群</span><strong>46</strong><p>5 km相连园区合并；处理区夜光像元只计算一次</p></article>
+        <article><span>正式SDID晚期样本</span><strong>100 + 180</strong><p>全国相似背景规格的完整处理园区／完整供体</p></article>
+        <article><span>已定位具名行动</span><strong>28 / 18</strong><p>柬埔寨行动记录／执法波次；冻结主结果仍为14地点／8波次</p></article>
+      </div>
+
+      <div class="method-grid">
+        <article class="method-card">
+          <span class="method-step">STEP 01</span>
+          <h3>固定政策时间与过渡期</h3>
+          <p>官方行动从2025年6月27日开始，7月14日发布第01号命令。6—7月单列为过渡期；完整政策后月份从8月开始，避免把已受影响的月份当作清洁基准。</p>
+          <div class="formula">Pre: 2023-06—2025-05 · Transition: 2025-06—07 · Post: 2025-08—2026-08</div>
+        </article>
+
+        <article class="method-card">
+          <span class="method-step">STEP 02</span>
+          <h3>并列建立三层空间反事实</h3>
+          <p>对照依次限制在同城市、同省和全国相似空间背景，并使用政策前夜光、人口、道路、建筑、POI、边境与赌场距离筛选。获得共同支持的园区分别为37、71和211个；密集园区另按5公里相连关系合并并去重夜光像元。</p>
+          <div class="formula">Support: same city 37 · same province 71 · national context 211</div>
+        </article>
+
+        <article class="method-card wide">
+          <span class="method-step">STEP 03</span>
+          <h3>DID只按诊断强度解释</h3>
+          <p>第10—13个月的匹配DID为：同城市+0.072、同省−0.271、全国相似背景−0.217。2023或2024虚假政策日期仍会在部分规格产生反应，说明结果依赖反事实层级，不能只凭一个DID系数概括。</p>
+          <div class="formula multi"><i>Y</i><sub>it</sub> = α<sub>i</sub> + λ<sub>t</sub> + β(Treated<sub>i</sub> × Post<sub>t</sub>) + ε<sub>it</sub></div>
+        </article>
+
+        <article class="method-card">
+          <span class="method-step">STEP 04</span>
+          <h3>CITS与正式SDID检验滞后收缩</h3>
+          <p>CITS拟合园区相对匹配网格的政策前趋势；正式SDID同时估计对照单位权重和政策前时间权重。第10—13个月，同城市SDID为−0.115，全国相似背景SDID为−0.526；同省虽为−0.763，但政策前安慰剂较大，仅保留为敏感性结果。RDiT已从研究设计移除。</p>
+          <div class="formula">Deviation<sub>it</sub> = Gap<sub>it</sub> − predicted Gap<sub>it</sub> from pre-policy trend</div>
+        </article>
+
+        <article class="method-card">
+          <span class="method-step">STEP 05</span>
+          <h3>具名行动采用分期ATT</h3>
+          <p>每个行动园区只与未来6个月仍未被具名行动处理的登记园区比较；同一执法波次先在波次内平均，再按波次等权汇总。另排除5公里内控制地点并逐波次删除。</p>
+          <p>官方具名地点先用名称、别名、地址和坐标与339地点库匹配；不能合并的地点保留独立外部ID。当前28条柬埔寨行动记录分为27条主样本与1条综合体中心敏感性样本，其中21条链接既有地点、4个赌场和3个非赌场建筑使用复核后的外部坐标。Zhuoyufeng已定位到名为“Zhuo Yufeng”的32层建筑，由官方门牌、行动照片与附近街景交叉核验后进入主样本。仍有3个具名地点和1个仅定位到小区的地点暂不进入1公里缓冲区回归。</p>
+          <div class="formula">ATT(g,t) = ΔY<sub>acted,g,t</sub> − ΔY<sub>not-yet-acted,g,t</sub></div>
+        </article>
+
+        <article class="method-card">
+          <span class="method-step">STEP 06</span>
+          <h3>结果重读决定证据等级</h3>
+          <p>三层DID、CITS、正式SDID和像元去重集群必须并列报告。当前证据支持“政策后期相对于可观测反事实路径转弱”，但空间设计结果不完全一致，不能写成所有园区统一、即时和稳定的总体经济下降。</p>
+          <div class="formula">RDiT excluded · HonestDiD not mechanically applied · DID + CITS + SDID</div>
+        </article>
+      </div>
+
+      <div class="method-audit">
+        <div><b>当前识别判断</b><span>后期转弱具有跨方法支持，但反事实层级改变估计量</span></div>
+        <p>第10—13个月：匹配DID为同城市+0.072、同省−0.271、全国相似背景−0.217；正式SDID为同城市−0.115、同省−0.763、全国相似背景−0.526。同省规格的政策前安慰剂为+0.138，不能作为标题结果；全国规格安慰剂为+0.025。</p>
+        <p>同城市、同省和全国背景共同支持分别仅覆盖37、71和211个园区，回答的不是完全相同的政策对象。虚假日期在部分DID规格仍有反应，因此主结论限定为“约第7—10个月后相对于可观测反事实路径的滞后、异质性减弱”。</p>
+        <p>HonestDiD没有被机械套用：6—7月是有官方证据的过渡期，清洁政策前月份与完整政策后月份并不连续；若把7月当作未处理基期，会改变处理定义。该方法待事件时间口径重新设计后再评估，而不是把软件未运行误写成稳健性通过。</p>
+        <p>上一版冻结分析把14个行动分为7个A级严格官方、6个B级佐证或中等实体匹配、1个C级监管媒体。A级样本关键外圈窗口为6/6波次负向，排除冲突省份后仍为5/5；多重校正后的最低p值为0.281，因此增强方向一致性，但不改变提示性结论。新增地点已完成夜光提取和第一轮匹配；完整稳健性套件重跑前，不用新增样本均值替代这组已审计结论。</p>
+      </div>
+    </section>
+
+    <section class="section-shell result-figures" id="results">
+      <div class="section-heading">
+        <div><span class="section-no">RESULTS</span><h2>阶段性分析图</h2></div>
+        <p>具名行动图仍对应2026-11-02冻结的14个首次行动地点和8个独立波次；全国政策结论已在2026-11-06加入同城市、同省、全国相似背景三层匹配及正式SDID重审。</p>
+      </div>
+
+      <div class="result-status-strip">
+        <article><span>全国登记地点</span><strong>291</strong><p>全部保留在描述数据库</p></article>
+        <article><span>主因果支持样本</span><strong>206</strong><p>政策前建筑存在＋夜光共同支持</p></article>
+        <article><span>具名行动主样本</span><strong>14 / 8</strong><p>首次行动地点／独立执法波次</p></article>
+        <article><span>机制样本</span><strong>13</strong><p>可连接历史OSM变化的行动地点</p></article>
+      </div>
+
+      <div class="result-gallery">
+        <figure class="result-figure wide">
+          <a href="analysis-figures/figure_1_identification_sample_flow.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_1_identification_sample_flow.png" alt="因果识别样本从291个地点筛选至206个主样本的流程图" loading="lazy"></a>
+          <figcaption><span>FIGURE 01 · SAMPLE</span><h3>识别样本如何形成</h3><p>291个柬埔寨地点中，286个具有政策前建筑证据，211个满足最低夜光共同支持，206个同时满足两项条件。样本减少只发生在因果估计阶段，不会从描述数据库删除地点。</p></figcaption>
+        </figure>
+
+        <figure class="result-figure wide">
+          <a href="analysis-figures/figure_2_national_policy_dynamics.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_2_national_policy_dynamics.png" alt="全国政策动态DID诊断和趋势调整结果" loading="lazy"></a>
+          <figcaption><span>FIGURE 02 · NATIONAL POLICY</span><h3>全国政策：后期夜间活动相对减弱，但全国DID只作诊断</h3><p>左图的虚假政策年份检验未通过，因此不能单独承担强因果结论。右图以12个月和24个月政策前趋势调整，两种规格均显示后期收缩，但早期路径不同，不能给出所有园区统一的精确收缩起点。</p></figcaption>
+        </figure>
+
+        <figure class="result-figure">
+          <a href="analysis-figures/figure_3_named_action_event_paths.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_3_named_action_event_paths.png" alt="具名执法行动前后不同距离夜间灯光路径" loading="lazy"></a>
+          <figcaption><span>FIGURE 03 · EVENT PATH</span><h3>具名行动后的空间路径</h3><p>0—1公里核心区没有稳定的立即下降；1—5公里外圈在行动后数月呈现更一致的负向路径。行动当月只作描述，主窗口从行动后第1个完整月开始。</p></figcaption>
+        </figure>
+
+        <figure class="result-figure">
+          <a href="analysis-figures/figure_4_named_action_stage_effects.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_4_named_action_stage_effects.png" alt="具名行动按距离和阶段估计的夜间灯光效应" loading="lazy"></a>
+          <figcaption><span>FIGURE 04 · DISTANCE</span><h3>外围减弱比核心区更一致</h3><p>0—1公里三个阶段的区间均跨零；1—3公里在第3—4个月转弱，3—5公里在第3—6个月持续转弱。它支持外围夜间活动相对减弱，不等同于确认企业关闭或清剿成功。</p></figcaption>
+        </figure>
+
+        <figure class="result-figure wide">
+          <a href="analysis-figures/figure_5_poi_mechanism.png" target="_blank" rel="noreferrer"><img src="analysis-figures/figure_5_poi_mechanism.png" alt="具名行动后历史OSM商业类别相对城市份额变化" loading="lazy"></a>
+          <figcaption><span>FIGURE 05 · POI MECHANISM</span><h3>商业结构变化提供机制线索</h3><p>行动后第3—4个月，多数历史OSM类别的园区周边相对城市份额下降；该冻结窗口中的office/business为小幅正值。样本只有13个地点，而且OSM变化是地图对象变化，不是经核验的商铺开关日期。</p></figcaption>
+        </figure>
+      </div>
+
+      <div class="result-limit"><b>共同解释边界</b><p>夜间灯光是<code>asinh</code>转换后的NASA Black Marble月度辐亮度，用于代理夜间活动；它不是GDP、就业、居民福利或非法活动规模的直接测量。图中不确定区间和未通过的诊断必须与点估计同时阅读。</p></div>
+    </section>
+
     <section class="section-shell audit" id="audit">
       <div class="section-heading">
-        <div><span class="section-no">03</span><h2>质量审计</h2></div>
+        <div><span class="section-no">05</span><h2>质量审计</h2></div>
         <p>任何无法回到原始页面、图片或新闻来源的结论，都不会进入最终分析层。</p>
       </div>
       <div class="audit-grid" id="audit-grid"></div>
@@ -89,7 +272,7 @@
 
     <section class="section-shell evidence">
       <div class="section-heading">
-        <div><span class="section-no">04</span><h2>目标数据结构</h2></div>
+        <div><span class="section-no">06</span><h2>目标数据结构</h2></div>
         <p>一个地点可以拥有多个名称、功能、事件、来源与时间节点。</p>
       </div>
       <div class="schema-flow">
@@ -105,7 +288,7 @@
 
     <section class="section-shell blockers" id="blockers">
       <div class="section-heading">
-        <div><span class="section-no">05</span><h2>需要处理的问题</h2></div>
+        <div><span class="section-no">07</span><h2>需要处理的问题</h2></div>
         <p>这里只展示会影响下一阶段的真实阻塞项。</p>
       </div>
       <div id="blocker-list"></div>
@@ -118,5 +301,8 @@
     <a href="https://cyberscammonitor.net/" target="_blank" rel="noreferrer">SOURCE ↗</a>
   </footer>
   <script src="app.js"></script>
+  <script src="data-status.js"></script>
+  <script src="acquisition.js"></script>
+  <script src="visual-analysis.js"></script>
 </body>
 </html>

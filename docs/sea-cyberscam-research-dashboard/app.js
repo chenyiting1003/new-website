@@ -1,4 +1,4 @@
-const statusLabel = {done:'已完成', active:'进行中', blocked:'受阻', planned:'待开始'};
+const statusLabel = {done:'已完成', active:'进行中', paused:'已暂缓', blocked:'受阻', planned:'待开始'};
 
 async function loadProgress() {
   const response = await fetch('progress.json', {cache:'no-store'});
@@ -10,16 +10,12 @@ function render(data) {
   document.querySelector('#snapshot-date').textContent = `更新 ${data.updated_at}`;
   document.querySelector('#current-focus').textContent = data.current_focus;
   const done = data.tasks.filter(t => t.state === 'done').length;
-  const weighted = data.tasks.reduce((sum,t) => sum + ({done:1,active:.5,blocked:.15,planned:0}[t.state] || 0), 0);
+  const weighted = data.tasks.reduce((sum,t) => sum + ({done:1,active:.5,paused:0,blocked:.15,planned:0}[t.state] || 0), 0);
   const percent = Math.round(weighted / data.tasks.length * 100);
   const ring = document.querySelector('#progress-ring');
   ring.style.setProperty('--progress', `${percent}%`);
   document.querySelector('#progress-value').textContent = `${percent}%`;
   document.querySelector('#completed-tasks').textContent = `${done} / ${data.tasks.length}`;
-
-  document.querySelector('#metric-grid').innerHTML = data.metrics.map(m => `
-    <article class="metric-card"><span class="metric-label">${m.label}</span><strong>${m.value}</strong><p>${m.note}</p></article>
-  `).join('');
 
   const max = Math.max(...Object.values(data.countries));
   document.querySelector('#country-bars').innerHTML = Object.entries(data.countries).map(([name,value]) => `
@@ -32,6 +28,10 @@ function render(data) {
       <div><h3>${t.title}</h3><p>${t.detail}</p></div>
       <span class="task-status">${statusLabel[t.state]}</span>
     </article>
+  `).join('');
+
+  document.querySelector('#conclusion-grid').innerHTML = data.conclusions.map(c => `
+    <article class="audit-card pass"><div class="audit-icon">↗</div><h3>${c.title}</h3><p>${c.detail}</p></article>
   `).join('');
 
   document.querySelector('#audit-grid').innerHTML = data.audit.map(a => `

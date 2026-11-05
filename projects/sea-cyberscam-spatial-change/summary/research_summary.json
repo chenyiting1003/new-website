@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-10-15",
+  "scope": "aggregate_only",
+  "collection": {
+    "profiles": 339,
+    "countries": 2,
+    "country_counts": {"Cambodia": 291, "Myanmar": 48},
+    "images": 767,
+    "external_source_links": 692,
+    "public_comments_detected": 0,
+    "profile_failures": 0
+  },
+  "change_dataset": {
+    "profiles_screened": 339,
+    "profiles_with_relevant_evidence": 82,
+    "sentence_evidence_total": 598,
+    "affirmed_evidence": 594,
+    "negated_or_unconfirmed_evidence": 4,
+    "evidence_dimension_counts": {
+      "previous_formal_use": 31,
+      "licence_or_registration": 142,
+      "spatial_or_operational_change": 103,
+      "reported_illicit_activity": 322
+    },
+    "sites_with_formal_change_illicit_chain": 20,
+    "sites_covering_all_four_dimensions": 7,
+    "sites_with_dated_illicit_after_or_same_period": 32
+  },
+  "interpretation": [
+    "Counts are aggregate pipeline outputs; no place-level records are published here.",
+    "Evidence dimensions do not by themselves prove a legal-to-illicit transition.",
+    "Licence mentions are source claims rather than registry verification.",
+    "Page publication dates are not substituted for event dates."
+  ]
+}
