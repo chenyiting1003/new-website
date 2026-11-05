@@ -104,7 +104,7 @@
           <article><span>处理</span><b>全国政策环境＋具名地方行动</b><p>全国模块以2025年6—7月为过渡期；具名行动按实际日期和首次行动波次处理。</p></article>
           <article><span>主要结果</span><b>月度夜间灯光</b><p>园区0—1公里为主结果；1—3、3—5公里用于扩散、迁移与恢复检验。</p></article>
           <article><span>辅助结果</span><b>POI商业结构与逐日夜光</b><p>用于检验商业重组、立即反应与滞后，不替代月度主结果。</p></article>
-          <article><span>对照</span><b>可比非园区网格／尚未行动园区</b><p>全国模块使用20公里外共同支持网格；具名行动使用未来6个月尚未处理地点。</p></article>
+          <article><span>对照</span><b>三层可比网格／尚未行动园区</b><p>全国模块并列同城市、同省与全国相似背景供体；具名行动使用未来6个月尚未处理地点。</p></article>
         </div>
         <a class="inline-link" href="#method">查看完整识别方法与公式 →</a>
       </section>
@@ -121,8 +121,8 @@
         <article class="confidence-card"><div class="panel-kicker">EVIDENCE CONFIDENCE</div><h3>证据置信度</h3><div id="confidence-list" class="confidence-list"></div><p>低置信度与证据不足地点进入人工复核，不自动覆盖主表。</p></article>
       </div>
       <div class="manual-review-callout">
-        <div><span>MANUAL REVIEW</span><h3>66个地点仍无法从原始照片识别</h3><p>现场调研和地图商户点资料已补充5个地点；剩余60个柬埔寨地点已有2025 Q2—2026 Q2同范围遥感对比图，可使用同一功能字典逐一复核。6个缅甸地点因没有可用影像继续保留“无法判断”。</p></div>
-        <a class="button primary" href="visual-review.html">继续人工识别 60 个地点</a>
+        <div><span>MANUAL REVIEW</span><h3>当前功能与历史功能分开复核</h3><p>当前可见功能仍有66个地点无法判断；另有247个地点需要核验历史／原始功能，其中75个因证据价值和影像条件进入第一优先级。PP15“天空之城”、PP21“柬埔寨湖北总商会”、SHK23“皇家利华国际大酒店”先作为待核验名称别名保存，不据此推断牌照、业主或违法状态。</p></div>
+        <a class="button primary" href="visual-review.html">继续当前功能人工复核</a>
       </div>
     </section>
 
@@ -157,11 +157,11 @@
 
       <div class="method-stats" aria-label="合成对照当前样本规模">
         <article><span>登记地点</span><strong>291</strong><p>全国政策环境，不等于当天全部被清剿</p></article>
-        <article><span>全国共同支持</span><strong>211</strong><p>至少5个政策前亮度相近、距园区20 km以上的网格</p></article>
+        <article><span>三层共同支持</span><strong>37 / 71 / 211</strong><p>同城市／同省／全国相似背景；缺乏支持的地点不强行外推</p></article>
         <article><span>政策前建筑主样本</span><strong>206</strong><p>有Open Buildings证据并通过共同支持</p></article>
         <article><span>同城市严格支持</span><strong>37 / 221</strong><p>四个核心城市；城市×月份固定效应，未强行放宽共同支持</p></article>
         <article><span>空间去重集群</span><strong>46</strong><p>5 km相连园区合并；处理区夜光像元只计算一次</p></article>
-        <article><span>正式SDID晚期样本</span><strong>100 + 114</strong><p>第10—13个月完整处理园区／完整供体</p></article>
+        <article><span>正式SDID晚期样本</span><strong>100 + 180</strong><p>全国相似背景规格的完整处理园区／完整供体</p></article>
         <article><span>已定位具名行动</span><strong>28 / 18</strong><p>柬埔寨行动记录／执法波次；冻结主结果仍为14地点／8波次</p></article>
       </div>
 
@@ -175,22 +175,22 @@
 
         <article class="method-card">
           <span class="method-step">STEP 02</span>
-          <h3>并列建立三类空间反事实</h3>
-          <p>远距离供体分别使用5、10、20、30公里排除阈值；城市园区另在同城市内寻找相似网格并加入城市×月份固定效应；密集园区按5公里相连关系合并为集群并去重夜光像元。20公里仍是冻结基准，但不再是唯一反事实。</p>
-          <div class="formula">|mean<sub>pre</sub>(Y<sup>T</sup>) − mean<sub>pre</sub>(Y<sup>C</sup>)| ≤ 0.5</div>
+          <h3>并列建立三层空间反事实</h3>
+          <p>对照依次限制在同城市、同省和全国相似空间背景，并使用政策前夜光、人口、道路、建筑、POI、边境与赌场距离筛选。获得共同支持的园区分别为37、71和211个；密集园区另按5公里相连关系合并并去重夜光像元。</p>
+          <div class="formula">Support: same city 37 · same province 71 · national context 211</div>
         </article>
 
         <article class="method-card wide">
           <span class="method-step">STEP 03</span>
-          <h3>DID与同城市设计只按诊断强度解释</h3>
-          <p>远距离DID在第10—13个月为负，但同城市DID为+0.012、接近零；2023虚假政策日期仍有反应。说明后期变化不能仅凭一个DID系数概括，必须与趋势调整、空间去重和正式SDID共同判断。</p>
+          <h3>DID只按诊断强度解释</h3>
+          <p>第10—13个月的匹配DID为：同城市+0.072、同省−0.271、全国相似背景−0.217。2023或2024虚假政策日期仍会在部分规格产生反应，说明结果依赖反事实层级，不能只凭一个DID系数概括。</p>
           <div class="formula multi"><i>Y</i><sub>it</sub> = α<sub>i</sub> + λ<sub>t</sub> + β(Treated<sub>i</sub> × Post<sub>t</sub>) + ε<sub>it</sub></div>
         </article>
 
         <article class="method-card">
           <span class="method-step">STEP 04</span>
           <h3>CITS与正式SDID检验滞后收缩</h3>
-          <p>CITS拟合园区相对匹配网格的政策前趋势；正式SDID同时估计对照单位权重和政策前时间权重。全国SDID第10—13个月为−0.361，同城市SDID为−0.100；后者区间包含零。RDiT已从研究设计移除。</p>
+          <p>CITS拟合园区相对匹配网格的政策前趋势；正式SDID同时估计对照单位权重和政策前时间权重。第10—13个月，同城市SDID为−0.115，全国相似背景SDID为−0.526；同省虽为−0.763，但政策前安慰剂较大，仅保留为敏感性结果。RDiT已从研究设计移除。</p>
           <div class="formula">Deviation<sub>it</sub> = Gap<sub>it</sub> − predicted Gap<sub>it</sub> from pre-policy trend</div>
         </article>
 
@@ -205,15 +205,16 @@
         <article class="method-card">
           <span class="method-step">STEP 06</span>
           <h3>结果重读决定证据等级</h3>
-          <p>远距离DID、同城市DID、CITS、正式SDID和像元去重集群必须并列报告。当前证据支持“政策后期相对于反事实路径转弱”，但空间设计结果不完全一致，不能写成所有园区统一、即时和稳定的总体经济下降。</p>
-          <div class="formula">RDiT excluded · DID + CITS + formal SDID + overlap-safe clusters</div>
+          <p>三层DID、CITS、正式SDID和像元去重集群必须并列报告。当前证据支持“政策后期相对于可观测反事实路径转弱”，但空间设计结果不完全一致，不能写成所有园区统一、即时和稳定的总体经济下降。</p>
+          <div class="formula">RDiT excluded · HonestDiD not mechanically applied · DID + CITS + SDID</div>
         </article>
       </div>
 
       <div class="method-audit">
-        <div><b>当前识别判断</b><span>后期转弱具有三角支持，但仍依赖反事实设计</span></div>
-        <p>第10—13个月：5/10公里DID为−0.241，20公里为−0.140，30公里为−0.157；同城市DID为+0.012；去重园区集群为−0.404；正式全国SDID为−0.361，同城市SDID为−0.100。趋势调整和SDID普遍支持后期转弱，但简单同城市DID接近零。</p>
-        <p>同城市严格共同支持仅覆盖37/221个核心城市园区，说明高亮度赌场和园区在同城普通网格中很难找到可信对照。2023虚假政策日期仍有反应；全13个月SDID仅保留16个完整园区且政策前安慰剂很大。因此主结论限定为“约第7—10个月后相对于可观测反事实路径的滞后、异质性减弱”。</p>
+        <div><b>当前识别判断</b><span>后期转弱具有跨方法支持，但反事实层级改变估计量</span></div>
+        <p>第10—13个月：匹配DID为同城市+0.072、同省−0.271、全国相似背景−0.217；正式SDID为同城市−0.115、同省−0.763、全国相似背景−0.526。同省规格的政策前安慰剂为+0.138，不能作为标题结果；全国规格安慰剂为+0.025。</p>
+        <p>同城市、同省和全国背景共同支持分别仅覆盖37、71和211个园区，回答的不是完全相同的政策对象。虚假日期在部分DID规格仍有反应，因此主结论限定为“约第7—10个月后相对于可观测反事实路径的滞后、异质性减弱”。</p>
+        <p>HonestDiD没有被机械套用：6—7月是有官方证据的过渡期，清洁政策前月份与完整政策后月份并不连续；若把7月当作未处理基期，会改变处理定义。该方法待事件时间口径重新设计后再评估，而不是把软件未运行误写成稳健性通过。</p>
         <p>上一版冻结分析把14个行动分为7个A级严格官方、6个B级佐证或中等实体匹配、1个C级监管媒体。A级样本关键外圈窗口为6/6波次负向，排除冲突省份后仍为5/5；多重校正后的最低p值为0.281，因此增强方向一致性，但不改变提示性结论。新增地点已完成夜光提取和第一轮匹配；完整稳健性套件重跑前，不用新增样本均值替代这组已审计结论。</p>
       </div>
     </section>
@@ -221,7 +222,7 @@
     <section class="section-shell result-figures" id="results">
       <div class="section-heading">
         <div><span class="section-no">RESULTS</span><h2>阶段性分析图</h2></div>
-        <p>具名行动图仍对应2026-11-02冻结的14个首次行动地点和8个独立波次；全国政策结论已在2026-11-05加入距离敏感性、同城市匹配、园区集群去重与正式SDID重审。</p>
+        <p>具名行动图仍对应2026-11-02冻结的14个首次行动地点和8个独立波次；全国政策结论已在2026-11-06加入同城市、同省、全国相似背景三层匹配及正式SDID重审。</p>
       </div>
 
       <div class="result-status-strip">
